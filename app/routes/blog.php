@@ -112,11 +112,10 @@ class blog extends Router
 
                     //Get User Blog info
                     $blog_info = $blog_control->getBlog($UserBlogID);
-                    $blog_by_page = $blog_control->getBlogbyPageX($blog_info);
                     $blog_like = $like_control->getLikes(1, $UserBlogID);
 
                     //Check if blog has a post
-                    if ($blog_by_page == null) {
+                    if ($blog_info == null) {
                         //This user has no post
                         //Set blog info
                         $data = [
@@ -128,31 +127,16 @@ class blog extends Router
                         //Serve /blog/u/<loginid> with blog.php
                         $this->view($data);
 
-                        //Check if the blog nav has more than 1 page
-                    } elseif (!isset($blog_by_page['row'])) {
-                        //Blog nav has 1 page
+                    } else {
                         //Set blog info
                         $data = [
                             'page' => 'blog',
                             'blog_name' => $loginid,
-                            'blog_max_page' => $blog_by_page['max_page'],
+                            'blog_info' => $blog_info,
                             'total_post' => is_null($blog_info) ? 0 : sizeof($blog_info),
                             'total_likes' => $blog_like
                         ];
                         //Serve /blog/u/<loginid> with blog.php
-                        $this->view($data);
-                    } else {
-                        //Blog has more than 1 page
-                        $data = [
-                            'page' => 'blog',
-                            'blog_info' => $blog_by_page['row'],
-                            'blog_current_page' => $blog_by_page['cur_page'],//goes to page x of blog nav
-                            'blog_max_page' => $blog_by_page['max_page'],
-                            'blog_name' => $loginid,
-                            'total_post' => is_null($blog_info) ? 0 : sizeof($blog_info),
-                            'total_likes' => $blog_like
-                        ];
-                        //Serve /blog/u/<loginid>?page=<int> with blog.php
                         $this->view($data);
                     }
                 }

@@ -41,10 +41,6 @@
                     // End of the 'if' statement
                     endif; 
                 ?>
-            <footer class="card-footer text-muted">
-                <?php if (isset($data['blog_info'])) : ?>
-                <?php endif; ?>
-            </footer>
         <?php else : ?>
             <!-- no posts -->
             <h2 class="card-header">Hmmm...</h2>

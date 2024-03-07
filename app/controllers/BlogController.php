@@ -59,46 +59,6 @@ class BlogController{
      * OR
      * @return array containing current up to 5 blog entries
      */
-    public function getBlogbyPageX($blog_info){
-        $page_no=1;
-        $max_page=1;
-        if($blog_info==null){
-            return null;
-        }else{
-            //Get the max pages of a user
-        $max_page = (int)(ceil(sizeof($blog_info)/5));
-        }
-        $top_post=0;
-        $bot_post=4;
-        //Check if blog is being search by page number
-        if(isset($_GET['page'])){
-            if(is_numeric(($_GET['page']))){
-                //Sets the page to get
-                $page_no = (int)$_GET['page'];
-            }else{
-                //Page is must be a number
-                return ['max_page'=>$max_page];
-            }
-        }
-        //check if page to get is above max page
-        if($page_no > $max_page){
-            //Page not found
-            return ['max_page'=>$max_page];
-        }
-        //Index of the top post
-        $top_post = $top_post+5*($page_no-1);
-        //Index of the bottom post
-        $bot_post = $bot_post+5*($page_no-1) < sizeof($blog_info) ? $bot_post+5*($page_no-1) :sizeof($blog_info)-1;
-        //Check is there is only 1 page
-        if($top_post==$bot_post){
-            $rows = array_slice($blog_info,$top_post);
-        }else {
-            //There is more than 1 page
-            //Get 5 blog entrys by index
-            $rows = array_slice($blog_info, $top_post, 5);
-        }
-        return ['row'=>$rows,'cur_page'=>$page_no,'max_page'=>$max_page];
-    }
 
     /**
      * Get Post

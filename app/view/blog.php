@@ -26,12 +26,11 @@ endif; ?>
     </article>
 <?php unset($_SESSION['postdeleted']);
 endif;?>
- <h2 class="card border-0 border-bottom pt-3 mb-3 text-center">Welcome to <?= $data['blog_name'] ?>'s blog!</h2>
+<h2 class="card border-0 border-bottom pt-3 mb-3 text-center">Welcome to <?= $data['blog_name'] ?>'s blog!</h2>
     <article class="card m-1">
         <?php if (isset($data['blog_info'])) : ?>
                 <div class="card-header d-sm-flex">
                     <h2 class="mr-auto  pt-2 pl-5">Blog Post</h2>
-                    <?php include 'blog.nav.inc.php' ?>
                 </div>
             <?php if (isset($data['blog_info']))  : ?>
                 <?php foreach ($data['blog_info'] as &$entry) : ?>
@@ -55,31 +54,21 @@ endif;?>
                                     <?= $preview_content ?>
                                 </p>
                                 <a href="<?=parse_url($_SERVER['REQUEST_URI'])['path']. "/" . $entry->getField('id')->getValue() ?>"
-                                   class="btn btn-primary">Read More</a>
+                                    class="btn btn-primary">Read More</a>
                             </div>
                     </article>
                 <?php endforeach; ?>
             <?php endif; ?>
             <footer class="card-footer text-muted">
                 <?php if (isset($data['blog_info'])) : ?>
-                    <?php include 'blog.nav.inc.php' ?>
                 <?php endif; ?>
             </footer>
         <?php else : ?>
-                    <?php if (isset($data['blog_max_page'])) : ?>
-                        <div class="card-body">
-                            <h5 class="card-title">Max Page Reached (&gt;.&lt;)</h5>
-                            <p class="card-text">Yep, Page out of Range kinda</p>
-                            <a href="<?= parse_url($_SERVER["REQUEST_URI"])["path"] ?>" class="btn btn-primary">Return
-                                to Blog</a>
-                        </div>
-                    <?php else: ?>
-                        <h2 class="card-header">Hmmm...</h2>
-                        <div class="card-body">
-                            <h5 class="card-title">No Post Yet!</h5>
-                            <p class="card-text">Blog under construction</p>
-                        </div>
-                    <?php endif; ?>
+            <h2 class="card-header">Hmmm...</h2>
+            <div class="card-body">
+                <h5 class="card-title">No Post Yet!</h5>
+                <p class="card-text">Blog under construction</p>
+            </div>
         <?php endif; ?>
     </article>
     <article class="card mt-5 mb-5 ml-1 mr-1 h-25">
