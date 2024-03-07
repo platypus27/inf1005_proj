@@ -20,6 +20,10 @@ class main extends Router{
         $this->view(['page'=>'blogs']);
     }
 
+    protected function friends(){
+        $this->view(['page'=>'friends']);
+    }
+
     protected function contact_us(){
         (new ContactUsController)->submit_us();
         header("Location: /main/contactus");
