@@ -110,7 +110,7 @@
                         <div class="row pb-2 pl-5 pr-2">
                                 <span class="input-group">
                                     <textarea class="form-control comment-box" rows="5" aria-label="With textarea"
-                                              name="comment" required></textarea>
+                                            name="comment" required></textarea>
                                 </span>
                         </div>
                         <div class="row pb-2 pl-5">

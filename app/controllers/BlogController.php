@@ -215,7 +215,7 @@ class BlogController{
             $post_update->setValue($key,$val);
         }
         return $post_update->update();
-      }
+    }
 
     public function deletePost($postid){
         require_once('../app/model/Post.php');

@@ -3,8 +3,8 @@ require_once("../app/model/utils/Field.php");
 require_once("../app/model/utils/Model.php");
 require_once("../app/utils/helpers.php");
 
-class Post extends Model{
-    const tablename = "friends";
+class Friends_List extends Model{
+    const tablename = "friends_list";
     const fields = ["friendA", "friendB"];
     protected $friendA = null;
     protected $friendB = null;
@@ -19,9 +19,17 @@ class Post extends Model{
         $this->friendA->setValue(get($values["friendA"]));
         $this->friendB->setValue(get($values["friendB"]));
     }
+
+    public function getFriendA() {
+        return $this->friendA;
+    }
+
+    public function getFriendB() {
+        return $this->friendB;
+    }
 }
 
-function getAllFriends($fields='*', $filter_by=[]){
-    return get_row('Friends', $fields, $filter_by);
+function get_friends($fields='*', $filter_by=[]){
+    return get_row('Friends_List', $fields, $filter_by);
 }
 ?>
