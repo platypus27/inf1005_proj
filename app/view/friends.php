@@ -5,6 +5,7 @@
             <h2 class="mr-auto  pt-2 pl-5">Friends List</h2>
         </div>
         <?php 
+            // print_r($data['friends_list']);
             if (isset($data['friends_list'])) {
                 foreach ($data['friends_list'] as $friendsList) {
                     echo 'Friend A ID: ' . $friendsList->getFriendA()->getValue() . '<br>';

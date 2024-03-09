@@ -9,7 +9,8 @@ class FriendsController{
 
     public function getUserID($login_id){
         require_once("../app/model/User.php");
-        $userFound = get_user("*", ['loginid'=>['=', $login_id]]);
+        // $userFound = get_user("*", ['loginid'=>['=', $login_id]]);
+        $userFound = get_user("*");
         if($userFound==null){
             return $rows = null;
         }else {

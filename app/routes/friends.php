@@ -12,11 +12,9 @@ class friends extends Router
         //loginid in route
         $loginid = $argv[0];
         $UserBlogID = $friends_control->getUserID($loginid);
-        
         $friendsList = $friends_control->getFriends($UserBlogID);
         $data = [
             'page' => 'friends',
-            // 'friends_list' => 'wtf man how to do',
             'friends_list' => $friendsList,
         ];
         $this->view($data);

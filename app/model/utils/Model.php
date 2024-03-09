@@ -125,4 +125,39 @@ function get_row($table, $fields='*', $filter_by=[]){
     return count($model) > 0 ? $model : null;
 }
 
+function get_table($table, $fields='*', $filter_by=[]){
+    $tablename = $table::tablename;
+    $known_fields = $table::fields;
+    $query = new Query();
+    if (is_array($fields)){
+        $fields = array_intersect($fields, $known_fields);
+    }
+    $proc = [];
+    array_walk($filter_by, function ($value, $key) use (&$proc, $known_fields){
+        if (in_array($key, $known_fields)){
+            $proc[$key] = $value[0];
+        }
+    });
+
+    $stmt = $query->build_select($tablename, $fields, $proc);
+    $conn = $query->build_connection();
+    $stmt = $conn->prepare($stmt);
+
+    array_walk($filter_by, function($value, $key) use ($stmt){
+        $field = $key;
+        $fvalue = $value[1];
+        $stmt->bindParam(":filter_$field", $fvalue);
+    });
+
+    $result = $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $model = [];
+    
+    array_walk($result, function($row, $id) use (&$model, $table){
+        $row['id'] = $id;
+        array_push($model, new $table($row));
+    });
+    return count($model) > 0 ? $model : null;
+}
+
 ?>
