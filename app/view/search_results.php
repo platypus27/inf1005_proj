@@ -16,10 +16,10 @@ if(isset($data['search'])){
                 <div class="col"><?php echo "<a href=/blog/u/".$loginid.">".$loginid."</a>";?></div>
                 <div class="col"><?php echo "<p>".$name."<p>";?></div>
               </div>  
-       <?php }
+      <?php }
     }  else{
-       ?> <div class="card p-5"> <?php echo "<h3>Oops! The user you are trying to find does not exist!</h3>";?></div>
-   <?php }
+      ?> <div class="card p-5"> <?php echo "<h3>Oops! The user you are trying to find does not exist!</h3>";?></div>
+  <?php }
 }
 ?>
 </div>

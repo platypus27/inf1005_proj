@@ -29,5 +29,40 @@ class FriendsController{
             return $user->getField('loginid')->getValue();
         }
     }
+
+    public function getFriendRequests($user_id){
+        require_once("../app/model/Friend_Requests.php");
+        $rows = get_friendRequests("*",['friendID'=>['=',$user_id]]);
+        return $rows;
+    }
+
+    public function getSentRequests($user_id){
+        require_once("../app/model/Friend_Requests.php");
+        $rows = get_friendRequests("*",['userID'=>['=',$user_id]]);
+        return $rows;
+    }
+
+    public function addComments($PostID){
+        require_once('../app/model/Friends_List.php');
+        $comment = "";
+        //validate comment
+        if(empty($_POST['friendA'])){
+            return false;
+        }else{
+            $friendA = $this->$_POST['friendA'];
+        }
+        if(empty($_POST['friendB'])){
+            return false;
+        }else{
+            $friendA = $this->$_POST['friendB'];
+        }
+
+        $add_friend = new Friends_List([
+            "friendA" = $friendA,
+            "friendB" = $friendB
+        ]);
+        $add_friend->add();
+        return true;
+    }
 }
 ?>

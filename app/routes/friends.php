@@ -9,6 +9,8 @@ class friends extends Router
     {
         $friends_control = new FriendsController();
         $friendsUsers = [];
+        $friendReq = [];
+        $sentReq = [];
 
         //loginid in route
         $loginid = $argv[0];
@@ -22,11 +24,53 @@ class friends extends Router
                 $friendsUsers[] = $friends_control->getLoginID($f->getFriendB()->getValue());
             }
         }
+
+        // friend requests
+        $friend_requests = $friends_control->getFriendRequests($UserID);
+        foreach ($friend_requests as $f) {
+            $friendReq[] = $friends_control->getLoginID($f->getUserID()->getValue());
+        }
+        $sent_requests = $friends_control->getSentRequests($UserID);
+        foreach ($sent_requests as $f) {
+            $sentReq[] =  $friends_control->getLoginID($f->getFriendID()->getValue());
+        }
+
         $data = [
             'page' => 'friends',
             'friends_list' => $friendsUsers,
+            'friend_requests' => $friendReq,
+            'sent_requests' => $sentReq,
             'userid' => $UserID
         ];
         $this->view($data);
+    }
+
+    protected function addfriend()
+    {
+        if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
+            $this->abort(400);
+        }
+        $friends_control = new FriendsController();
+        //Checks if a post is being added
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //A post is being added
+
+            //return  either array: an post entry is invalid, or bool: post entry is added
+            $addsuccess = $friends_control->AddFriend($_POST);
+            //Check if post is added
+            if (is_bool($addsuccess)) {
+                //Post is added
+                $_SESSION['post_success'] = true;
+                header("Location: /friends/u/" . $_SESSION[SESSION_LOGIN]);
+            } else {
+                //Post is not added
+
+                //returns to create post page with an error message
+                $this->view(['page' => 'friends', 'err_msg' => $addsuccess]);
+            }
+        } else {
+            //User is creating a post
+            $this->view(['page' => 'friends']);
+        }
     }
 }
