@@ -21,19 +21,9 @@ class friends extends Router
             elseif ($f->getFriendB()->getValue() != $UserID){
                 $friendsUsers[] = $friends_control->getLoginID($f->getFriendB()->getValue());
             }
-            // $test = $friends_control->getLoginID($friendsList->getFriendA()->getValue());
         }
-        // $test = $friends_control->getLoginID(2);
-
-        // if ($friendsList->getFriendA()->getValue() != $UserID){
-        //     $friendsUsers = ['']
-        // }
-        // if ($friendsList->getFriendB()->getValue() != $UserID){
-        //     echo 'Friend B ID: ' . $friendsList->getFriendB()->getValue() . '<br>';
-        // }
         $data = [
             'page' => 'friends',
-            // 'test' => $test,
             'friends_list' => $friendsUsers,
             'userid' => $UserID
         ];

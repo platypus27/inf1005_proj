@@ -5,10 +5,10 @@
             <h2 class="mr-auto  pt-2 pl-5">Friends List</h2>
         </div>
         <?php 
-            // echo $data['test'];
             if (isset($data['friends_list'])) {
-                foreach ($data['friends_list'] as $friendsList) {
-                    echo 'Friend ID: ' . $friendsList . '<br>';
+                foreach ($data['friends_list'] as $friend) {
+                    echo "<a href=/blog/u/".$friend.">";
+                    echo $friend ;
                     echo '<br>';  // add a blank line between friends
                 }
             }
