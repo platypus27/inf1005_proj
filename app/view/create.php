@@ -1,17 +1,17 @@
 <section class="ml-5 mr-5 mt-3">
 <?php if(isset($data['err_msg'])):?>
-<article class="alert alert-danger alert-dismissible fade show alert-box ml-5 w-25" role="alert">
-
-    <?php if(($data['err_msg'])[0]) : ?>
-    <p class="text-center">Title is empty</p>
-    <?php endif;
-    if(($data['err_msg'])[1]) :?>
-    <p class="text-center">Your Post is empty</p>
-    <?php endif;?>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</article>
+    <article class="alert alert-danger alert-dismissible fade show alert-box ml-5 w-25" role="alert">
+        
+        <?php if(($data['err_msg'])[0]) : ?>
+            <p class="text-center">Title is empty</p>
+            <?php endif;
+        if(($data['err_msg'])[1]) :?>
+        <p class="text-center">Your Post is empty</p>
+        <?php endif;?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </article>
 
 <?php endif;?>
     <h2>Submit new post</h2>

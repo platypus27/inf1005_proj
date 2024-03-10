@@ -65,6 +65,26 @@ class Model {
         }
     }
 
+    public function deleteFriendRequest(){
+        if ($this->userID->getValue() != null && $this->friendID->getValue() != null){
+            $query = new Query();
+            $userID = $this->userID->getName();
+            $friendID = $this->friendID->getName();
+            $stmt = $query->build_delete(static::tablename, [$userID=>"=", $friendID=>"="]);
+            $conn = $query->build_connection();
+            $stmt = $conn->prepare($stmt);
+            $userIDType = $this->userID->getType();
+            $userIDVal = $this->userID->getValue();
+            $friendIDType = $this->friendID->getType();
+            $friendIDVal = $this->friendID->getValue();
+            $stmt->bindParam(":filter_$userID", $userIDVal, $userIDType);
+            $stmt->bindParam(":filter_$friendID", $friendIDVal, $friendIDType);
+            return $stmt->execute();
+        } else {
+            return 0;
+        }
+    }
+
     public function update() {
         if ($this->id->getValue() != null){
             $query = new Query();

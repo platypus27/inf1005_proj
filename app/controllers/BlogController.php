@@ -225,8 +225,6 @@ class BlogController{
         if(is_array($post)){
             ($post[0])->delete();
         }
-
-
     }
 
       /**

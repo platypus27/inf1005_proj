@@ -36,33 +36,38 @@ class FriendsController{
         return $rows;
     }
 
+    public function getFriendRequest($firstID, $secondID){
+        require_once("../app/model/Friend_Requests.php");
+        $rows = get_friendRequests("*",['userID'=>['=',$firstID], 'friendID'=>['=',$secondID]]);
+        return $rows;
+    }
+
     public function getSentRequests($user_id){
         require_once("../app/model/Friend_Requests.php");
         $rows = get_friendRequests("*",['userID'=>['=',$user_id]]);
         return $rows;
     }
 
-    public function addComments($PostID){
+    public function confirmReq($friendA, $friendB){
         require_once('../app/model/Friends_List.php');
-        $comment = "";
-        //validate comment
-        if(empty($_POST['friendA'])){
-            return false;
-        }else{
-            $friendA = $this->$_POST['friendA'];
+        if($friendA != null || $friendB != null){
+            $Postvalue = [
+                "friendA" => $friendA,
+                "friendB" => $friendB
+            ];
         }
-        if(empty($_POST['friendB'])){
-            return false;
-        }else{
-            $friendA = $this->$_POST['friendB'];
-        }
+        $add_friend = new Friends_List($Postvalue);
+        return $add_friend->add();
+    }
 
-        $add_friend = new Friends_List([
-            "friendA" = $friendA,
-            "friendB" = $friendB
-        ]);
-        $add_friend->add();
-        return true;
+    public function deleteReq($userID, $friendID){
+        require_once('../app/model/Friend_Requests.php');
+        $request = $this -> getFriendRequest($userID, $friendID);
+        if ($request == null){
+            $request = $this -> getFriendRequest($friendID, $userID);
+        }
+        
+        return $request[0]->deleteFriendRequest();
     }
 }
 ?>
