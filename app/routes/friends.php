@@ -111,4 +111,34 @@ class friends extends Router
             $this->view(['page' => 'friends']);
         }
     }
+
+    protected function sendReq($argv){
+        $friends_control = new FriendsController();
+        $userID = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
+        $friendID = $friends_control->getUserID($argv[0]);
+        if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
+            $this->abort(400);
+        }
+        //Checks if a post is being added
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //A post is being added
+            
+            //return  either array: an post entry is invalid, or bool: post entry is added
+            $addsuccess = $friends_control->sendReq($userID, $friendID);
+            //Check if post is added
+            if (is_bool($addsuccess)) {
+                //Post is added
+                $_SESSION['post_success'] = true;
+                header("Location: /friends/u/" . $_SESSION[SESSION_LOGIN]);
+            } else {
+                //Post is not added
+
+                //returns to create post page with an error message
+                $this->view(['page' => 'friends', 'err_msg' => $addsuccess]);
+            }
+        } else {
+            //User is creating a post
+            $this->view(['page' => 'friends']);
+        }
+    }
 }

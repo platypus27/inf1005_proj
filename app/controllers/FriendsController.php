@@ -69,5 +69,17 @@ class FriendsController{
         
         return $request[0]->deleteFriendRequest();
     }
+
+    public function sendReq($userID, $friendID){
+        require_once('../app/model/Friend_Requests.php');
+        if($userID != null || $friendID != null){
+            $Postvalue = [
+                "userID" => $userID,
+                "friendID" => $friendID
+            ];
+        }
+        $add_request = new FriendRequests($Postvalue);
+        return $add_request->add();
+    }
 }
 ?>
