@@ -1,4 +1,7 @@
 <section>
+<?php print_r($data['test1']); ?>
+<?php echo "----" ?>
+<?php print_r($data['test2']); ?>
 <?php if (isset($_SESSION['post_success'])): ?>
     <article class="alert alert-success alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
         <h5 class="text-center">Your Post has been added!!</h5>
@@ -27,6 +30,35 @@ endif; ?>
 <?php unset($_SESSION['postdeleted']);
 endif;?>
 <h2 class="card border-0 border-bottom pt-3 mb-3 text-center">Welcome to <?= $data['blog_name'] ?>'s blog!</h2>
+    <?php 
+        if ($data['requests'] == null) {
+            echo "<form action='/blog/sendReq/".$data['blog_name']."' method='post'>";
+            echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";
+            echo "<button class='btn btn-primary' id='post-submit'>Send Friend Request</button>";
+            echo "</form>";
+        }
+        elseif ($data['requests'] == 'Friends') {
+            echo "<form action='/blog/delFriend/".$data['blog_name']."' method='post'>";
+            echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";
+            echo "<button class='btn btn-danger' id='post-submit'>".$data['requests']."</button>";
+            echo "</form>";
+        }
+        elseif ($data['requests'] == 'Requested'){
+            echo "<form action='/blog/deleteReq/".$data['blog_name']."' method='post'>";
+            echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";
+            echo "<button class='btn btn-danger' id='post-submit'>".$data['requests']."</button>";
+            echo "</form>";
+        }
+        elseif ($data['requests'] == 'Accept Request'){
+            echo "<form action='/blog/acceptReq/".$data['blog_name']."' method='post'>";
+            echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";
+            echo "<button class='btn btn-danger' id='post-submit'>".$data['requests']."</button>";
+            echo "</form>";
+        }
+        else {
+            echo "how the hell did it get here??";
+        }
+    ?>
     <article class="card m-1">
         <?php if (isset($data['blog_info'])) : ?>
                 <div class="card-header d-sm-flex">

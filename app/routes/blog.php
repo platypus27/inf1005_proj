@@ -2,6 +2,7 @@
 
 require_once('../app/controllers/BlogController.php');
 require_once('../app/controllers/LikesController.php');
+require_once('../app/controllers/FriendsController.php');
 
 
 class blog extends Router
@@ -48,6 +49,8 @@ class blog extends Router
     {
         $blog_control = new BlogController();
         $like_control = new LikesController();
+        $friends_control = new FriendsController();
+
         //Checks if parameters contains at least 1 and at most 2 parameters
         if ((sizeof($argv)) < 1 || (sizeof($argv) > 2)) {
             //loginid not in route or parameters > 2
@@ -56,12 +59,69 @@ class blog extends Router
             //loginid in route
             $loginid = $argv[0];
             $UserBlogID = $blog_control->getUserID($loginid);
+
             //Checks if the user exist
             if ($UserBlogID == null) {
                 //User does not exist
                 $this->abort(404);
             } else {
                 //User Exist
+                $requested = null;
+                // get friends
+                $UserID = $friends_control->getUserID($loginid);
+                $friendsList = $friends_control->getFriends();
+                if ($friendsList != null) {
+                    foreach ($friendsList as $f) {
+                        if ($f->getFriendA()->getValue() != $UserID){
+                            $friendsUsers[] = $friends_control->getLoginID($f->getFriendA()->getValue());
+                        }
+                        elseif ($f->getFriendB()->getValue() != $UserID){
+                            $friendsUsers[] = $friends_control->getLoginID($f->getFriendB()->getValue());
+                        }
+                        foreach ($friendsUsers as $friend) {
+                            if ($friend == $argv[0]) {
+                                $requested = 'Friends';
+                            }
+                        }
+                    }
+                }
+                else {
+                    // not currently a friend
+                    // get friend requests
+                    $friend_requests = $friends_control->getFriendRequests($UserBlogID);
+                    $sent_requests = $friends_control->getSentRequests($UserBlogID);
+
+                    // check if there is any ongoing requests eitherway
+                    if ($friend_requests != null || $sent_requests != null) {
+                        $test1 = "yes";
+                        // check if the user has already sent a request
+                        if ($friend_requests != null) {
+                            $test2 = "yes";
+                            foreach ($friend_requests as $f) {
+                                $test3 = "yes";
+                                $req = $friends_control->getLoginID($f->getUserID()->getValue());
+                                if ($req == $_SESSION[SESSION_LOGIN]) {
+                                    $test4 = "yes";
+                                    $requested = 'Requested';
+                                    break;
+                                }
+                            }
+                        }
+                        // check if the user has already received a request
+                        elseif ($sent_requests != null) {
+                            foreach ($sent_requests as $f) {
+                                $req = $friends_control->getLoginID($f->getUserID()->getValue());
+                                if ($req == $argv[0]) {
+                                    $requested = 'Accept Request';
+                                    break;
+                                }
+                            }
+                        }
+                        else {
+                            $requested = null;
+                        }
+                    }
+                }
 
                 //Check if request for a blog post or view blog
                 if (isset($argv[1])) {
@@ -101,7 +161,8 @@ class blog extends Router
                             'blog_name' => $loginid,
                             'comments' => $comments,
                             'comment_success' => $isComAdded,
-                            'script' => '/static/js/clipboard.js'
+                            'requests' => $requested,
+                            'script' => '/static/js/clipboard.js',
                         ];
 
                         //Serve /blog/u/<loginid>/<postid> with post.php
@@ -122,11 +183,14 @@ class blog extends Router
                             'page' => 'blog',
                             'blog_name' => $loginid,
                             'total_post' => 0,
-                            'total_likes' => 0
+                            'total_likes' => 0,
+                            'requests' => $requested,
+                            'test1' => $friendsList,
+                            'test2' => $friendsUsers,
                         ];
                         //Serve /blog/u/<loginid> with blog.php
                         $this->view($data);
-
+                        
                     } else {
                         //Set blog info
                         $data = [
@@ -134,7 +198,8 @@ class blog extends Router
                             'blog_name' => $loginid,
                             'blog_info' => $blog_info,
                             'total_post' => is_null($blog_info) ? 0 : sizeof($blog_info),
-                            'total_likes' => $blog_like
+                            'total_likes' => $blog_like,
+                            'requests' => $requested,
                         ];
                         //Serve /blog/u/<loginid> with blog.php
                         $this->view($data);
@@ -307,6 +372,91 @@ class blog extends Router
             }
         } else {
             $this->abort(404);
+        }
+    }
+
+    protected function sendReq($argv)
+    {
+        if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
+            $this->abort(400);
+        }
+        $friends_control = new FriendsController();
+        $friendA = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
+        $friendB = $friends_control->getUserID($argv[0]);
+        //Checks if a post is being added
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //A post is being added
+            
+            //return  either array: an post entry is invalid, or bool: post entry is added
+            $addsuccess = $friends_control->sendReq($friendA, $friendB);
+            //Check if post is added
+            if (is_bool($addsuccess)) {
+                //Post is added
+                $_SESSION['post_success'] = true;
+                header("Location: /blog/u/" . $argv[0]);
+            }
+        }
+    }
+
+    protected function deleteReq($argv)
+    {
+        $friends_control = new FriendsController();
+        $friendA = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
+        $friendB = $friends_control->getUserID($argv[0]);
+        if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
+            $this->abort(400);
+        }
+        //Checks if a post is being added
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //A post is being added
+            
+            //return  either array: an post entry is invalid, or bool: post entry is added
+            $removesuccess = $friends_control->deleteReq($friendA, $friendB);
+            //Check if post is added
+            if (is_bool($removesuccess)) {
+                //Post is added
+                $_SESSION['post_success'] = true;
+                header("Location: /blog/u/" . $argv[0]);
+            } else {
+                //Post is not added
+
+                //returns to create post page with an error message
+                header("Location: /blog/u/" . $argv[0]);
+            }
+        } else {
+            //User is creating a post
+            header("Location: /blog/u/" . $argv[0]);
+        }
+    }
+
+    protected function acceptReq($argv){
+        $friends_control = new FriendsController();
+        $friendA = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
+        $friendB = $friends_control->getUserID($argv[0]);
+        if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
+            $this->abort(400);
+        }
+        //Checks if a post is being added
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //A post is being added
+            
+            //return  either array: an post entry is invalid, or bool: post entry is added
+            $addsuccess = $friends_control->confirmReq($friendA, $friendB);
+            $removesuccess = $friends_control->deleteReq($friendA, $friendB);
+            //Check if post is added
+            if (is_bool($addsuccess)) {
+                //Post is added
+                $_SESSION['post_success'] = true;
+                header("Location: /blog/u/" . $_SESSION[SESSION_LOGIN]);
+            } else {
+                //Post is not added
+
+                //returns to create post page with an error message
+                header("Location: /blog/u/" . $_SESSION[SESSION_LOGIN]);
+            }
+        } else {
+            //User is creating a post
+            header("Location: /blog/u/" . $_SESSION[SESSION_LOGIN]);
         }
     }
 }

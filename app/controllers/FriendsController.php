@@ -1,22 +1,31 @@
 <?php
 class FriendsController{
-    public function getFriends(){
+    public function getFriends($user_id){
         require_once("../app/model/Friends_List.php");
-        $rows = get_friends("*");
-        // $rows = get_friends("*",['usr_id'=>['=',$user_id]]);
+        // $rows = get_friends("*");
+        $rows = get_friends("*",['usr_id'=>['=',$user_id]]);
         return $rows;
     }
 
-    public function getUserID($login_id){
+    public function getUserID(){
         require_once("../app/model/User.php");
-        $userFound = get_user("*", ['loginid'=>['=', $login_id]]);
-        // $userFound = get_user("*");
+        // $userFound = get_user("*", ['loginid'=>['=', $login_id]]);
+        $userFound = get_user("*");
         if($userFound==null){
             return $rows = null;
         }else {
             $user = $userFound[0];
             return $user->getField('id')->getValue();
         }
+    }
+
+    public function deleteFriend($friendA, $friendB){
+        require_once('../app/model/Friends_List.php');
+        $friend = get_friends("*",['friendA'=>['=',$friendA], 'friendB'=>['=',$friendB]]);
+        if ($friend == null){
+            $friend = get_friends("*",['friendA'=>['=',$friendB], 'friendB'=>['=',$friendA]]);
+        }
+        return $friend[0]->deleteFriend();
     }
 
     public function getLoginID($user_id){

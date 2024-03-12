@@ -141,4 +141,26 @@ class friends extends Router
             $this->view(['page' => 'friends']);
         }
     }
+
+    protected function delFriend($argv){
+        $friends_control = new FriendsController();
+        $userID = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
+        $friendID = $friends_control->getUserID($argv[0]);
+        
+        if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
+            $this->abort(400);
+        }
+        
+        // Delete the row from the friends_list table
+        $deleteSuccess = $friends_control->deleteFriend($userID, $friendID);
+        
+        if ($deleteSuccess) {
+            // Row deleted successfully
+            $_SESSION['post_success'] = true;
+            header("Location: /friends/u/" . $_SESSION[SESSION_LOGIN]);
+        } else {
+            // Error deleting the row
+            $this->view(['page' => 'friends', 'err_msg' => 'Error deleting friend']);
+        }
+    }
 }
