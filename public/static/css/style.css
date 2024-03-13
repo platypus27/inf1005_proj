@@ -63,6 +63,13 @@ a.dropdown-item:hover{
   background-color: #999999;
 }
 
+/* buttons */
+.btn-primary {
+  background-color: #917885;
+  color: #f0ffce;
+  border: none;
+}
+
 /*profile page*/
 #profile{
     margin: auto;
@@ -102,7 +109,6 @@ form.profile button:hover{
   color: red;
 }
 
-
 /*Contact us page*/
 #aboutus, #contactus{
     margin: auto;
@@ -140,13 +146,10 @@ form.contactus button:hover{
 
 }
 
-/* buttons */
-.btn-primary {
-  background-color: #917885;
-  color: #f0ffce;
-  border: none;
+/* Friends page */
+.friends{
+  background-color: white;
 }
-
 
 /*Login page*/
 #login{
