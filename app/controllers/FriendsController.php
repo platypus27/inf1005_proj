@@ -22,7 +22,6 @@ class FriendsController{
     }
 
     public function deleteFriend($friendA, $friendB){
-        error_log("deleteFriend: $friendA, $friendB");
         require_once('../app/model/Friends_List.php');
         $friend = get_friends("*",['friendA'=>['=',$friendA], 'friendB'=>['=',$friendB]]);
         if ($friend == null){
