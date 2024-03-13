@@ -87,10 +87,6 @@ endif;?>
                     </article>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <footer class="card-footer text-muted">
-                <?php if (isset($data['blog_info'])) : ?>
-                <?php endif; ?>
-            </footer>
         <?php else : ?>
             <h2 class="card-header">Hmmm...</h2>
             <div class="card-body">
