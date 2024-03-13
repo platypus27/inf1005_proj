@@ -51,7 +51,7 @@
                         <div class="tb">
                             <div class="td">
                                 <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                <input type="text" placeholder="type here..." name="search" aria-label="Search" required></div>
+                                <input type="text" placeholder="search..." name="search" aria-label="Search" required></div>
                                 <div class="td" id="s-cover">
                                 <button type="submit">
                                 <div id="s-circle"></div>

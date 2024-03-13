@@ -55,7 +55,7 @@ a img {
 }
 
 .active, .nav-link:hover {
-  color: #FE7773;
+  color: white;
   /* need change */
 }
 
@@ -138,6 +138,13 @@ form.contactus button{
 form.contactus button:hover{
   background-color: #0000CC;
 
+}
+
+/* buttons */
+.btn-primary {
+  background-color: #917885;
+  color: #f0ffce;
+  border: none;
 }
 
 
@@ -333,7 +340,7 @@ button {
   height: 4rem;
   margin-top: 0;
   border-width: 15px;
-  border: 1rem solid #fff;
+  border: 1rem solid #FFC2C3;
   background-color: transparent;
   border-radius: 50%;
   transition: 0.5s ease all;
@@ -360,7 +367,7 @@ button span:after {
   right: 0;
   width: 45px;
   height: 15px;
-  background-color: #fff;
+  background-color: #FFC2C3;
   border-radius: 10px;
   transform: rotateZ(0);
   transition: 0.5s ease all;
@@ -371,7 +378,7 @@ button span:after {
   width: 5rem;
   height: 1rem;
   border-width: 0;
-  background-color: #fff;
+  background-color: #FFC2C3;
   border-radius: 1rem;
 }
 
@@ -395,5 +402,41 @@ button span:after {
 #s-cover:hover button span:after {
   right: -6px;
   width: 40px;
-  background-color: #fff;
+  background-color: #FFC2C3;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}            
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 0px;
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); */
+  border-radius: 0px;
+  background-color: #90AFC5;
+}            
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 5px;
+  background: #FFC2C3;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #FFC2C3;
+}
+
+.classname::-webkit-scrollbar-track {
+      background-color: rgba(24, 44, 79, 0.2);
+    	border: none;
+}
+
+.classname::-webkit-scrollbar {
+    width: 6px;
+    background-color: rgba(24, 44, 79, 0.2);
+}
+
+.classname::-webkit-scrollbar-thumb {
+    background-color: rgba(24, 44, 79, 1);
 }
