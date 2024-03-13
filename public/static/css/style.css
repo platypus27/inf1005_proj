@@ -289,11 +289,11 @@ button {
 
 #cover {
   width: 90rem;
-  height: 5rem;
-  padding: 0 0 0 1.5rem;
-  background-color: #FFC2C3;
+  /* height: 5rem; */
+  /* padding: 0 0 0 1.5rem; */
+  /* background-color: #FFC2C3; */
   border-radius: 1rem;
-  box-shadow: 0 0 2rem #FFC2C3, 0 0 0 1.5rem #ffffffeb;
+  /* box-shadow: 0 0 2rem #FFC2C3, 0 0 0 1.5rem #ffffffeb; */
   transform: scale(0.6);
 }
 
@@ -309,7 +309,7 @@ input[type="text"] {
 }
 
 input[type="text"]::placeholder {
-  color: #e16868;
+  color: #FFC2C3;
 }
 
 #s-cover {
@@ -367,7 +367,7 @@ button span:after {
 }
 
 #s-cover:hover #s-circle {
-  top: -0.7rem;
+  top: 0;
   width: 5rem;
   height: 1rem;
   border-width: 0;
@@ -376,7 +376,6 @@ button span:after {
 }
 
 #s-cover:hover span {
-  top: 50%;
   left: 4rem;
   width: 1rem;
   margin-top: -1.1rem;
