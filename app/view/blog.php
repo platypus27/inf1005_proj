@@ -26,7 +26,7 @@ endif; ?>
     </article>
 <?php unset($_SESSION['postdeleted']);
 endif;?>
-<h2 class="card border-0 border-bottom pt-3 mb-3 text-center">Welcome to <?= $data['blog_name'] ?>'s blog!</h2>
+<h2 class="card border-0 border-bottom pt-3 mb-3 text-left"><?= strtoupper($data['blog_name']) ?></h2>
     <?php 
         if ($data['blog_name'] != $_SESSION[SESSION_LOGIN]) {
             if ($data['requests'] == null) {

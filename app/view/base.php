@@ -33,30 +33,34 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm py-1" style="background-color: #32a891;">
+    <nav class="navbar navbar-expand-sm py-1">
         <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN || $_SESSION[SESSION_RIGHTS] == AUTH_ADMIN)  : ?>
-            <a class="nav-brand" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>">
-                <img class="rounded-circle" src="/static/image/logo.jpg" id="logo" width="60" height="60" alt="Home" />
-            </a>
+            <a class="nav-brand" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>">   
         <?php else : ?>
-            <a class="navbar-brand" href="/">
-                <img class="rounded-circle" src="/static/image/logo.jpg" id="logo" width="60" height="60" alt="Home" />
-            </a>
+            <a class="nav-brand" href="/">
         <?php endif; ?>
+            <img class="rounded-circle" src="/static/image/logo.jpg" id="logo" alt="Home" />
+        </a>
         <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
             <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <form class="searchbar d-flex" method="post" action="/search" style="margin:auto;max-width:260px">
-                            <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                            <input type="text" placeholder="Search" name="search" aria-label="Search">
-                            <button type="submit"><i class="fa fa-search"> Search</i></button>
-                        </form>
-                    </li>
-                </ul>
+                <div id="cover">
+                    <form class="searchbar" method="post" action="/search" method="get" action="">
+                        <div class="tb">
+                            <div class="td">
+                                <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                <input type="text" placeholder="type here..." name="search" aria-label="Search" required></div>
+                                <div class="td" id="s-cover">
+                                <button type="submit">
+                                <div id="s-circle"></div>
+                                <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -83,17 +87,13 @@
                         <a class="nav-link" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>"><?= $_SESSION[SESSION_LOGIN] ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/blog/create">Create</a>
+                        <a class="nav-link" href="/blog/create">create</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Account Settings
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/account/profile"><i class="fas fa-cogs pr-3"></i>Profile</a>
-                            <span class="dropdown-divider"></span>
-                            <a class="dropdown-item" href="/signout"><i class="fas fa-sign-out-alt pr-3"></i>Sign Out</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/profile">profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signout">sign out</a>
                     </li>
                 </ul>
             <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
@@ -130,9 +130,6 @@
         include '../app/view/' . $data['page'] . '.php';
         ?>
     </main>
-    <footer class="footer border-top" id="basefooter">
-        <p class="text-center">Copyright &copy; 2020 Budget Blogspots</p>
-    </footer>
 </body>
 
 </html>
