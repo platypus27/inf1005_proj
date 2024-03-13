@@ -268,10 +268,11 @@ margin:auto;
 }
 
 .card {
-  background-color: #90AFC5;
+  background-color: white;
   border-radius: 1rem;
-  color: #FFC2C3;
-  border: 10px solid #FFC2C3;
+  color: black;
+  border: none;
+  /* border: 10px solid #FFC2C3; */
 }
 
 /* search */

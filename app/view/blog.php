@@ -26,7 +26,7 @@ endif; ?>
     </article>
 <?php unset($_SESSION['postdeleted']);
 endif;?>
-<h2 class="card border-0 border-bottom pt-3 mb-3 text-left"><?= strtoupper($data['blog_name']) ?></h2>
+<h2 class="card border-0 border-bottom pt-3 mb-3 text-left" style="color:#FFC2C3; font-weight:bold;"><?= strtoupper($data['blog_name']) ?></h2>
     <?php 
         if ($data['blog_name'] != $_SESSION[SESSION_LOGIN]) {
             if ($data['requests'] == null) {
@@ -58,7 +58,7 @@ endif;?>
     <article class="card m-1">
         <?php if (isset($data['blog_info'])) : ?>
                 <div class="card-header d-sm-flex">
-                    <h2 class="mr-auto  pt-2 pl-5">Blog Post</h2>
+                    <h2 class="mr-auto pt-2 pl-5">Blog Post</h2>
                 </div>
             <?php if (isset($data['blog_info']))  : ?>
                 <?php foreach ($data['blog_info'] as &$entry) : ?>
