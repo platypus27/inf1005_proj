@@ -29,7 +29,7 @@ class Friends_List extends Model{
     }
 }
 
-function get_friends(){
-    return get_table('friends_list');
+function get_friends($fields='*', $filter_by=[]){
+    return get_table('friends_list', $fields, $filter_by);
 }
 ?>

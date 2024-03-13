@@ -5,7 +5,7 @@ require_once('../app/controllers/FriendsController.php');
 
 class friends extends Router 
 {
-    protected function u($argv)
+    protected function u()
     {
         $friends_control = new FriendsController();
         $friendsUsers = [];
@@ -13,9 +13,9 @@ class friends extends Router
         $sentReq = [];
 
         //loginid in route
-        $loginid = $argv[0];
+        $loginid = $_SESSION[SESSION_LOGIN];
         $UserID = $friends_control->getUserID($loginid);
-        $friendsList = $friends_control->getFriends();
+        $friendsList = $friends_control->getFriends($UserID);
         foreach ($friendsList as $f) {
             if ($f->getFriendA()->getValue() != $UserID){
                 $friendsUsers[] = $friends_control->getLoginID($f->getFriendA()->getValue());
@@ -44,7 +44,8 @@ class friends extends Router
             'friends_list' => $friendsUsers,
             'friend_requests' => $friendReq,
             'sent_requests' => $sentReq,
-            'userid' => $UserID
+            'userid' => $UserID,
+            'test' => $friendsList
         ];
         $this->view($data);
     }

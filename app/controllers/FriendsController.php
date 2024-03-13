@@ -2,15 +2,17 @@
 class FriendsController{
     public function getFriends($user_id){
         require_once("../app/model/Friends_List.php");
-        // $rows = get_friends("*");
-        $rows = get_friends("*",['usr_id'=>['=',$user_id]]);
+        $rowsA = get_friends("*", ['friendA' => ['=', $user_id]]);
+        $rowsB = get_friends("*", ['friendB' => ['=', $user_id]]);
+        $rowsA = $rowsA ? $rowsA : [];
+        $rowsB = $rowsB ? $rowsB : [];
+        $rows = array_merge($rowsA, $rowsB);
         return $rows;
     }
 
-    public function getUserID(){
+    public function getUserID($login_id){
         require_once("../app/model/User.php");
-        // $userFound = get_user("*", ['loginid'=>['=', $login_id]]);
-        $userFound = get_user("*");
+        $userFound = get_user("*", ['loginid'=>['=', $login_id]]);
         if($userFound==null){
             return $rows = null;
         }else {

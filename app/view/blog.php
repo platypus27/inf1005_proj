@@ -1,7 +1,4 @@
 <section>
-<?php print_r($data['test1']); ?>
-<?php echo "----" ?>
-<?php print_r($data['test2']); ?>
 <?php if (isset($_SESSION['post_success'])): ?>
     <article class="alert alert-success alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
         <h5 class="text-center">Your Post has been added!!</h5>

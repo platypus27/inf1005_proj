@@ -69,7 +69,7 @@ class blog extends Router
                 $requested = null;
                 // get friends
                 $UserID = $friends_control->getUserID($loginid);
-                $friendsList = $friends_control->getFriends();
+                $friendsList = $friends_control->getFriends($UserID);
                 if ($friendsList != null) {
                     foreach ($friendsList as $f) {
                         if ($f->getFriendA()->getValue() != $UserID){
@@ -78,10 +78,11 @@ class blog extends Router
                         elseif ($f->getFriendB()->getValue() != $UserID){
                             $friendsUsers[] = $friends_control->getLoginID($f->getFriendB()->getValue());
                         }
-                        foreach ($friendsUsers as $friend) {
-                            if ($friend == $argv[0]) {
-                                $requested = 'Friends';
-                            }
+                    }
+                    foreach ($friendsUsers as $friend) {
+                        $test10=$friend;
+                        if ($friend == $_SESSION[SESSION_LOGIN]) {
+                            $requested = 'Friends';
                         }
                     }
                 }
@@ -185,8 +186,6 @@ class blog extends Router
                             'total_post' => 0,
                             'total_likes' => 0,
                             'requests' => $requested,
-                            'test1' => $friendsList,
-                            'test2' => $friendsUsers,
                         ];
                         //Serve /blog/u/<loginid> with blog.php
                         $this->view($data);
