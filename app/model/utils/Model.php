@@ -65,6 +65,26 @@ class Model {
         }
     }
 
+    public function deleteFriend(){
+        if ($this->friendA->getValue() != null && $this->friendB->getValue() != null){
+            $query = new Query();
+            $friendA = $this->friendA->getName();
+            $friendB = $this->friendB->getName();
+            $stmt = $query->build_delete(static::tablename, [$friendA=>"=", $friendB=>"="]);
+            $conn = $query->build_connection();
+            $stmt = $conn->prepare($stmt);
+            $friendAType = $this->friendA->getType();
+            $friendAVal = $this->friendA->getValue();
+            $friendBType = $this->friendB->getType();
+            $friendBVal = $this->friendB->getValue();
+            $stmt->bindParam(":filter_$friendA", $friendAVal, $friendAType);
+            $stmt->bindParam(":filter_$friendB", $friendBVal, $friendBType);
+            return $stmt->execute();
+        } else {
+            return 0;
+        }
+    }
+
     public function deleteFriendRequest(){
         if ($this->userID->getValue() != null && $this->friendID->getValue() != null){
             $query = new Query();

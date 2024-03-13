@@ -86,6 +86,9 @@ class blog extends Router
                         }
                     }
                 }
+                elseif ($loginid == $_SESSION[SESSION_LOGIN]) {
+                    $requested = 'MYSELF';
+                }
                 else {
                     // not currently a friend
                     // get friend requests
@@ -456,6 +459,36 @@ class blog extends Router
         } else {
             //User is creating a post
             header("Location: /blog/u/" . $_SESSION[SESSION_LOGIN]);
+        }
+    }
+
+    protected function delFriend($argv) {
+        $friends_control = new FriendsController();
+        $friendA = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
+        $friendB = $friends_control->getUserID($argv[0]);
+        if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
+            $this->abort(400);
+        }
+        //Checks if a post is being added
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //A post is being added
+            
+            //return  either array: an post entry is invalid, or bool: post entry is added
+            $removesuccess = $friends_control->deleteFriend($friendA, $friendB);
+            //Check if post is added
+            if (is_bool($removesuccess)) {
+                //Post is added
+                $_SESSION['post_success'] = true;
+                header("Location: /blog/u/" . $argv[0]);
+            } else {
+                //Post is not added
+
+                //returns to create post page with an error message
+                header("Location: /blog/u/" . $argv[0]);
+            }
+        } else {
+            //User is creating a post
+            header("Location: /blog/u/" . $argv[0]);
         }
     }
 }
