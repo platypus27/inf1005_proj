@@ -313,6 +313,7 @@ input[type="text"] {
   height: 96px;
   font-size: 3rem;
   line-height: 1;
+  font-weight: bold;
 }
 
 input[type="text"]::placeholder {
