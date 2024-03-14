@@ -26,7 +26,7 @@ endif; ?>
     </article>
 <?php unset($_SESSION['postdeleted']);
 endif;?>
-<h2 class="card border-0 border-bottom pt-3 mb-3 text-left" style="color:#FFC2C3; font-weight:bold;"><?= strtoupper($data['blog_name']) ?></h2>
+<h2 class="card border-0 border-bottom pt-3 mb-3 text-left" style="color:#FFC2C3; font-weight:bold;"><?= strtolower($data['blog_name']) ?></h2>
     <?php 
         if ($data['blog_name'] != $_SESSION[SESSION_LOGIN]) {
             if ($data['requests'] == null) {
@@ -57,9 +57,6 @@ endif;?>
     ?>
     <article class="card m-1">
         <?php if (isset($data['blog_info'])) : ?>
-                <div class="card-header d-sm-flex">
-                    <h2 class="mr-auto pt-2 pl-5">Blog Post</h2>
-                </div>
             <?php if (isset($data['blog_info']))  : ?>
                 <?php foreach ($data['blog_info'] as &$entry) : ?>
                     <article class="card m-5">
@@ -82,7 +79,7 @@ endif;?>
                                     <?= $preview_content ?>
                                 </p>
                                 <a href="<?=parse_url($_SERVER['REQUEST_URI'])['path']. "/" . $entry->getField('id')->getValue() ?>"
-                                    class="btn btn-primary">Read More</a>
+                                    class="btn btn-primary float-right">Read More</a>
                             </div>
                     </article>
                 <?php endforeach; ?>
@@ -94,12 +91,5 @@ endif;?>
                 <p class="card-text">Blog under construction</p>
             </div>
         <?php endif; ?>
-    </article>
-    <article class="card mt-5 mb-5 ml-1 mr-1 h-25">
-        <h5 class="card-header text-center">Blog Stats</h5>
-        <div class="card-body">
-                <p class="text-center"><span class="font-weight-bold"><?=$data['total_post']?></span> Post</p>
-                <p class="text-center"><span class="font-weight-bold"><?=$data['total_likes']?></span> Likes</p>
-        </div>
     </article>
 </section>

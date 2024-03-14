@@ -3,6 +3,7 @@
 * {
   font-family: "Dosis", sans-serif;
   outline: none;
+  border-radius: 1rem;
 }
 
 html{
@@ -54,9 +55,65 @@ a img {
   margin: 0.5rem;
 }
 
+#post-title input{
+  height: 5rem;
+  font-size: x-large;
+  color: black;
+  font-weight: bold;
+  border-radius: 1rem;
+}
+
+#post-content textarea{
+  font-size: large;
+  font-weight: bold;
+  color: black;
+  border-radius: 1rem;
+}
+
+#post-submit {
+  width: auto;
+  height: auto;
+  padding: 1rem 2rem 1rem 2rem;
+  font-weight: bold;
+  border-radius: 1rem;
+}
+
+#post-submit:hover {
+  background-color: #FFC2C3;
+}
+
 .active, .nav-link:hover {
   color: white;
   /* need change */
+}
+
+.nav-pills {
+  margin: 2rem 0 2rem 0 !important;
+}
+
+.nav-pills a {
+  padding: 1rem 2rem;
+  margin-right: 5rem;
+  background-color: white;
+  border: 3px solid #917885;
+  color: #917885;
+}
+
+.nav-pills a.active {
+  background-color: #917885;
+  color: #f0ffce;
+}
+
+.tab-content .active {
+  color: black;
+}
+
+.tab-pane.active{
+  margin-top: 3rem;
+}
+
+.tab-pane label{
+  font-weight: bolder;
 }
 
 a.dropdown-item:hover{
@@ -70,32 +127,46 @@ a.dropdown-item:hover{
   border: none;
 }
 
+.form-group button {
+  width: 12rem;
+  height: 4rem;
+  padding: 1rem 2rem 1rem 2rem !important;
+}
+
+.form-group{
+  color: black;
+  font-weight: bold;
+}
+
 /*profile page*/
 #profile{
     margin: auto;
     margin-top: 1rem;
+    background-color: #90AFC5;
 }
 
 form.profile{
-  margin-left: 3rem;
-  margin-right: 2rem;
+  background-color: white;
+  font-weight: bold;
 }
 
 form.profile input{
-  border: 1px solid grey;
-  border-radius: 3px;
-  width: 15rem;
-  padding: 4px;
+  border: 2px solid #917885;
+  border-radius: 0.5rem;
+  width: 50rem;
+  padding: 1rem;
 }
 
 form.profile button{
   margin: 0 auto;
   padding: 4px;
-  background-color: #0000FF;
+  border-radius: 0.5rem;
+  background-color: #917885;
+  color: #f0ffce;
 }
 
 form.profile button:hover{
-  background-color: #0000CC;
+  background-color: #FFC2C3;
 
 }
 
@@ -229,7 +300,6 @@ margin:auto;
     overflow-wrap: break-word;
 }
 .post-preview {
-    overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
@@ -268,6 +338,17 @@ margin:auto;
 .card-header {
   background-color: #90AFC5;
   border: none;
+  border-radius: 1rem !important;
+  padding: 0.75rem 0;
+}
+
+.m-5 .card-header{
+  background-color: white;
+  border: 3px solid #917885;
+  color: #917885;
+  padding-left: 1rem;
+  font-weight: bold;
+  font-size: large;
 }
 
 .card {
@@ -308,11 +389,11 @@ button {
   transform: scale(0.6);
 }
 
-form {
+.searchbar {
   height: 96px;
 }
 
-input[type="text"] {
+.td input[type="text"] {
   width: 100%;
   height: 96px;
   font-size: 3rem;
@@ -320,7 +401,7 @@ input[type="text"] {
   font-weight: bold;
 }
 
-input[type="text"]::placeholder {
+.td input[type="text"]::placeholder {
   color: #FFC2C3;
 }
 
