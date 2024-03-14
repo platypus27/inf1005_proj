@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Blog</title>
+    <title>tint</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="SHORTCUT ICON" href="/static/image/icon.ico" type="image/x-icon" />
@@ -60,19 +60,34 @@
             <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/u">Manage Users</a>
+                        <a class="nav-link" href="/admin/u">manage users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/contact">Contact Requests</a>
+                        <a class="nav-link" href="/admin/contact">contact requests</a>
                     </li>
                 </ul>
+                <div id="cover" style="width:60rem;">
+                    <form class="searchbar" method="post" action="/search" method="get" action="">
+                        <div class="tb">
+                            <div class="td">
+                                <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required></div>
+                                <div class="td" id="s-cover">
+                                <button type="submit">
+                                <div id="s-circle"></div>
+                                <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             <?php else : ?>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/main/aboutus">About Us</a>
+                        <a class="nav-link" href="/main/aboutus">about us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/main/contactus">Contact Us</a>
+                        <a class="nav-link" href="/main/contactus">contact us</a>
                     </li>
                 </ul>
             <?php endif; ?>
@@ -97,16 +112,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>"><?= $_SESSION[SESSION_LOGIN] ?></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Account Settings
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/account/profile"><i class="fas fa-cogs pr-3"></i>Profile</a>
-                            <span class="dropdown-divider"></span>
-                            <a class="dropdown-item" href="/signout"><i class="fas fa-sign-out-alt pr-3"></i>Sign Out</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog/create">create</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/profile">profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signout">sign out</a>
+                    </li>       
                 </ul>
             <?php else : ?>
                 <ul class="nav navbar-nav navbar-right" id="signin">

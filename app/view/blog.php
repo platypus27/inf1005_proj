@@ -85,10 +85,8 @@ endif;?>
                 <?php endforeach; ?>
             <?php endif; ?>
         <?php else : ?>
-            <h2 class="card-header">Hmmm...</h2>
             <div class="card-body">
-                <h5 class="card-title">No Post Yet!</h5>
-                <p class="card-text">Blog under construction</p>
+                <h5 class="card-title">no posts...</h5>
             </div>
         <?php endif; ?>
     </article>

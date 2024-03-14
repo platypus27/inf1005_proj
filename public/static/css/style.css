@@ -140,9 +140,9 @@ a.dropdown-item:hover{
 
 /*profile page*/
 #profile{
-    margin: auto;
-    margin-top: 1rem;
-    background-color: #90AFC5;
+  margin: auto;
+  margin-top: 1rem;
+  background-color: #90AFC5;
 }
 
 form.profile{
@@ -182,21 +182,22 @@ form.profile button:hover{
 
 /*Contact us page*/
 #aboutus, #contactus{
-    margin: auto;
-    margin-left: 20px;
-    margin-right: 20px;
-    border-width: 0;
+  /* margin: auto; */
+  margin-left: 20px;
+  margin-right: 20px;
+  border-width: 0;
+  background-color: #90AFC5;
 }
 
 #contact{
   margin: auto;
   float: center;
-  background-color: #2f4454;
+  background-color: white;
 }
 #contactheader{
-  background-color: white;
   border-width: 1.5px;
   border-color: black;
+  background-color: white;
 }
 
 form.contactus textarea, form.contactus input{
@@ -208,8 +209,11 @@ form.contactus textarea, form.contactus input{
 }
 
 form.contactus button{
-  width: 8rem;
-  background-color: #0000FF;
+  width: 5rem;
+  height: 3rem;
+  padding: 0.5rem;
+  background-color: #917885;
+  color: #f0ffce;
 }
 
 form.contactus button:hover{
@@ -222,16 +226,15 @@ form.contactus button:hover{
   background-color: white;
 }
 
-/*Login page*/
-#login{
-  align-items: center;
+#login {
+  padding: 2rem;
 }
 
 form.login input{
   border: 1px solid grey;
-  border-radius: 3px;
+  border-radius: 0.5rem;
   min-width: 20%;
-  max-width: 20rem;
+  max-width: 40rem;
 }
 #loginerror{
   color:red;
@@ -242,40 +245,45 @@ form.login input{
 }
 
 form.login button{
-  background-color: #0000FF;
+  background-color: #917885;
+  color: #f0ffce;
+  border-radius: 1rem;
 }
 
 form.login button:hover{
-  background-color: #0000CC;
-
+  background-color: white;
+  border: 3px solid #917885;
+  color: #917885;
 }
 
 /*Registration page*/
 form.register{
   margin: auto;
   margin-top: 1rem;
-  width: 85%;
 }
 
 form.register input{
   border: 1px solid grey;
-  border-radius: 3px;
+  border-radius: 0.5rem;
 }
 
 form.register button{
-  background-color: #0000FF;
+  border-radius: 1rem;
+  background-color: #917885;
+  color: #f0ffce;
 }
 
 form.register button:hover{
-  background-color: #0000CC;
-
+  background-color: white;
+  border: 3px solid #917885;
+  color: #917885;
 }
 
 
 /*About us page*/
 #aboutheader{
   text-align: center;
-  background-color: #2f4454;
+  background-color: #90AFC5;
   border-width: 1px;
   border-color: black;
 }
@@ -359,7 +367,25 @@ margin:auto;
   /* border: 10px solid #FFC2C3; */
 }
 
-/* search */
+/* search page */
+#search_header {
+  color: #FFC2C3;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+#search_container {
+  background-color: white;
+  font-size: large;
+  font-weight: bold;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.card.text-center {
+  background-color: #90AFC5;
+}
+
 .tb {
   display: table;
   width: 100%;
@@ -379,13 +405,19 @@ button {
   background-color: transparent;
 }
 
+/* register page */
+
+.register.form-group {
+  background-color: white;
+  padding: 2rem; 
+  padding-bottom: 5rem;
+}
+
+/* searchbar */
+
 #cover {
   width: 90rem;
-  /* height: 5rem; */
-  /* padding: 0 0 0 1.5rem; */
-  /* background-color: #FFC2C3; */
   border-radius: 1rem;
-  /* box-shadow: 0 0 2rem #FFC2C3, 0 0 0 1.5rem #ffffffeb; */
   transform: scale(0.6);
 }
 
@@ -498,7 +530,6 @@ button span:after {
 
 ::-webkit-scrollbar-track {
   -webkit-border-radius: 0px;
-  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); */
   border-radius: 0px;
   background-color: #90AFC5;
 }            

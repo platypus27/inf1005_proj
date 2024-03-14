@@ -1,8 +1,7 @@
 <div class="card" id="aboutus">
-    <h1 class="card-header" id="aboutheader">About Us</h1>
-    <!--description of our blog-->
     
     <p class="card-body" id="aboutbody">
         <h2>Welcome</h2>
-        This is a budget blogspot, where anyone and everyone can write down what they feel like writing like a personal blog but at the same time, you can follow other people's blog and read what they write which is something like facebook where you can like and comment but it's more like personal blog type of website where you can just express what you want to let anyone to read it.
-</div>
+        <p>hold under come go from will set water tomatoes school public between origami first part group feel first there problem place end have little general only course say great then plan person those set to tell moment sow dragon in a den wise old man korean fainted</p>
+        <p>~ adapted from monkeytype</p>
+    </div>
