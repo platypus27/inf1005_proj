@@ -180,6 +180,19 @@ form.profile button:hover{
   color: red;
 }
 
+.card.border-0.m-3 {
+  padding: 1.5rem;
+  background-color: #90AFC5;
+}
+
+.card.border-0.m-3 h1 {
+  background-color: #90AFC5;
+}
+
+.card.border-0.m-3 .table{
+  background-color: white;
+}
+
 /*Contact us page*/
 #aboutus, #contactus{
   /* margin: auto; */

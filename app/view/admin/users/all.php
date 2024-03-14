@@ -2,7 +2,7 @@
     <h1>Registered users</h1>
 <?php if (isset($data['users'])) { ?>
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table">
                 <tr>
                     <th>ID</th>
                     <th>Username</th>
