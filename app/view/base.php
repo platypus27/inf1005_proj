@@ -113,9 +113,6 @@
                         <a class="nav-link" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>"><?= $_SESSION[SESSION_LOGIN] ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/blog/create">create</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/account/profile">profile</a>
                     </li>
                     <li class="nav-item">
