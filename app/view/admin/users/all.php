@@ -1,15 +1,15 @@
 <section class="card border-0 m-3">
-    <h1>Registered users</h1>
+    <h1 style="color:#ffc2c3;">users</h1>
 <?php if (isset($data['users'])) { ?>
         <div class="table-responsive">
             <table class="table">
                 <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Name</th>
-                    <th>Rights</th>
-                    <th>Suspended</th>
+                    <th>id</th>
+                    <th>user</th>
+                    <th>email</th>
+                    <th>name</th>
+                    <th>rights</th>
+                    <th>suspended</th>
                 </tr>
                 <?php
                     foreach ($data['users'] as $user) { 
