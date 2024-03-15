@@ -40,7 +40,7 @@
         <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse mr-auto d-flex justify-content-end" id="navbarSupportedContent">
             <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
                 <div id="cover">
                     <form class="searchbar" method="post" action="/search" method="get" action="">
@@ -60,13 +60,13 @@
             <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/u">manage users</a>
+                        <a class="nav-link" href="/admin/u">manage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/contact">contact requests</a>
+                        <a class="nav-link" href="/admin/contact">contacts</a>
                     </li>
                 </ul>
-                <div id="cover" style="width:60rem;">
+                <div id="cover" style="width:62rem;">
                     <form class="searchbar" method="post" action="/search" method="get" action="">
                         <div class="tb">
                             <div class="td">
