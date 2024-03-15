@@ -37,7 +37,7 @@ class admin extends Router{
             self::view(['page'=>'admin/users/specific', 'user'=>$user, 'script'=>'/static/js/admin/action.js']);
         } else {
             $users = get_user(['id', 'loginid', 'email', 'name', 'isadmin', 'suspended']);
-            self::view(['page'=>'admin/users/all', 'users'=>$users]);
+            self::view(['page'=>'admin/users/all', 'users'=>$users, 'script'=>'/static/js/admin/action.js']);
         }
     }
 
