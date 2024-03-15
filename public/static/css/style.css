@@ -243,6 +243,11 @@ form.contactus button:hover{
   padding: 2rem;
 }
 
+.login{
+  background-color: white;
+  padding: 2rem;
+}
+
 form.login input{
   border: 1px solid grey;
   border-radius: 0.5rem;
