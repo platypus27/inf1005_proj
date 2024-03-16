@@ -25,7 +25,6 @@ class blogs extends Router
                 'page' => 'blogs',
                 'total_post' => 0,
                 'total_likes' => 0,
-                'blog_info' => 'tests3'
             ];
             //Serve /main/blogs with blog.php
             $this->view($data);
