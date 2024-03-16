@@ -39,7 +39,7 @@ class blogs extends Router
                 require_once '../app/model/Post.php';
                 if(isset($_SESSION[SESSION_LOGIN])){
                     $usr_id = $blog_control->getUserID($_SESSION[SESSION_LOGIN]);
-                    $usr_like[] = $like_control->getLikes(3, null, $postid = $x);
+                    $usr_like[] = $like_control->getLikes(3, $usr_id, $postid = $x);
                     $post_like[] = $like_control->getLikes(2, null, $postid = $x);
                 }
             }

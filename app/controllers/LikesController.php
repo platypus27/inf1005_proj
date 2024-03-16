@@ -87,7 +87,7 @@ class LikesController{
             $row = get_post_likes('*',['posts_id'=>['=',$postid]]);
             return is_null($row) ? 0 : sizeof($row);
         }elseif($liketype == 3){
-            return $row = get_post_likes('*', ['posts_id'=>['=',$postid]]);
+            return $row = get_post_likes('*',['usr_id'=>['=',$usr_id], 'posts_id'=>['=',$postid]]);
         }
 
     }
