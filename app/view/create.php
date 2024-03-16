@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="<?=FORM_CSRF_FIELD?>" value="<?=$_SESSION[SESSION_CSRF_TOKEN]?>">
-                        <button class="btn btn-primary float-right" id="post-submit">add post</button>
+                        <button class="btn btn-primary float-right comment" id="post-submit">add post</button>
                     </div>
                 </div>
             </fieldset>

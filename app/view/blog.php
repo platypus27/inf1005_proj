@@ -156,7 +156,7 @@ endif;?>
                                             </span>
                                             <span class="input-group float-right">
                                                 <input type="hidden" name="<?=FORM_CSRF_FIELD?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                                <input class="btn btn-primary" type="submit" name="submit">
+                                                <input class="btn btn-primary comment" type="submit" name="submit">
                                             </span>
                                         </form>
                                         <span class="border-top"></span>

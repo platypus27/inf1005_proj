@@ -44,6 +44,18 @@ h2 {
   border: none;
 }
 
+.btn-danger:active {
+  background-color: #917885 !important;
+  color: #f0ffce;
+  border: none;
+}
+
+.btn-danger:visited {
+  background-color: #917885 !important;
+  color: #f0ffce;
+  border: none;
+}
+
 .btn-primary {
   background-color: #917885;
   color: #f0ffce;
@@ -54,6 +66,31 @@ h2 {
 .btn-primary:hover {
   background-color: white;
   outline: 3px solid #917885;
+  color: #917885;
+}
+
+.btn-primary.comment:active {
+  background-color: white !important;
+  outline: 3px solid #917885 !important;
+  border: none !important;
+  color: #917885;
+}
+
+.btn-primary:active {
+  background-color: white !important;
+  border: 3px solid #917885 !important;
+  color: #917885;
+}
+
+.btn-primary:visited {
+  background-color: white !important;
+  border: 3px solid #917885 !important;
+  color: #917885;
+}
+
+.btn-primary:focus {
+  background-color: white !important;
+  border: 3px solid #917885 !important;
   color: #917885;
 }
 
@@ -120,7 +157,7 @@ a img {
 }
 
 #post-submit:hover {
-  background-color: #FFC2C3;
+  background-color: white;
 }
 
 .active, .nav-link:hover {
@@ -207,7 +244,7 @@ form.profile button{
 }
 
 form.profile button:hover{
-  background-color: #FFC2C3;
+  background-color: white;
 
 }
 
@@ -271,8 +308,11 @@ form.contactus button{
 }
 
 form.contactus button:hover{
-  background-color: #0000CC;
+  background-color: white;
+}
 
+form.contactus button:active{
+  background-color: white !important;
 }
 
 /* posts */
