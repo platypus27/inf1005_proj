@@ -1,5 +1,5 @@
 <section class="card border-0 m-3" id="login">
-    <h1 style="color:#ffc2c3;">login</h1>
+    <h1 style="color:#ffc2c3; font-weight:bold;">login</h1>
     <form class="login text-left" name="frmLogin" action="/login/login_process" method="POST">
         <div class="form-group">
             <label for="loginid">user</label>

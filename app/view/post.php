@@ -1,6 +1,6 @@
 <section>
     <?php $entry = $data['post_info'][0]; ?>
-        <h2 class="card-title m-5">Title: <?= $entry->getField('title')->getValue() ?></h2>
+        
 
         <?php if (is_bool($data['comment_success'])) :?>
             <article class="card m-5 border-0">
@@ -23,31 +23,29 @@
             </article>
         <?php endif;?>
         <article class="card m-5">
-        <div class="card-header">
-            <h6 class="row">
-                    <?php
-                    $epochCreated = (int)($entry->getField('created_at')->getValue());
-                    $epochUpdated = (int)($entry->getField('updated_at')->getValue());
+            <div class="card-header" id="postheader">
+                <p class="card-text blog-post" style="font-size:xx-large;"><?= $entry->getField('title')->getValue() ?></p>
+                <div class="card-body">
+                    <p class="card-text blog-post">
+                        <?php $content = $entry->getField('content')->getValue(); ?>
+                        <?= $content ?>
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="col text-right pl-0"><?= $data["likes_count"] ?> likes</p>
+                </div>
+                <h6 class="row">
+                        <?php
+                        $epochCreated = (int)($entry->getField('created_at')->getValue());
+                        $epochUpdated = (int)($entry->getField('updated_at')->getValue());
 
-                    $dtCreated = new DateTime("@$epochCreated");
-                    $dtUpdated = new DateTime("@$epochUpdated");
-                    echo "<span class='col-md text-left'>" . $dtCreated->format('D, j M Y g:i:s A') . "</span>";
-                    if ($epochUpdated > $epochCreated) {
-                        echo "<span class='col-md text-right'>Last Edited: " . $dtUpdated->format('D, j M Y g:i:s A') . "</span>";
-                    } ?>
-            </h6>
-            <div class="row">
-                <p class="col text-right pr-1"><?= $data["likes_count"] ?></p>
-                <p class="col text-left pl-0">Likes</p>
-            </div>
-            </div>
-            <div class="card-body">
-                <p class="card-text blog-post">
-                    <?php $content = $entry->getField('content')->getValue(); ?>
-                    <?= $content ?>
-                </p>
-            </div>
-            <footer class="card-footer text-muted">
+                        $dtCreated = new DateTime("@$epochCreated");
+                        $dtUpdated = new DateTime("@$epochUpdated");
+                        echo "<span class='col-md text-left'>" . $dtCreated->format('D, j M Y g:i:s A') . "</span>";
+                        if ($epochUpdated > $epochCreated) {
+                            echo "<span class='col-md text-right'>Last Edited: " . $dtUpdated->format('D, j M Y g:i:s A') . "</span>";
+                        } ?>
+                </h6>
                 <div class="d-sm-flex">
                     <span class="mr-auto p-1">
                     <a class="btn btn-primary" href="/blog/u/<?= $data['blog_name'] ?>">Back to Blog</a>
@@ -81,20 +79,20 @@
                     <?php if (isset($_SESSION[SESSION_LOGIN])):
                         if ($data['blog_name'] == $_SESSION[SESSION_LOGIN])  : ?>
                             <div class="p-1">
-                            <a class="btn btn-primary d-sm-flex justify-content-end"
+                            <a class="btn btn-primary d-sm-flex"
                                 href="/blog/updatepost/<?= $entry->getField("id")->getValue() ?>">Update Post</a>
                             </div>
                             <div class="p-1">
                             <form action="/blog/deletepost" method="post">
                             <input type="hidden" name="postid" value="<?= $entry->getField("id")->getValue() ?>">
                             <input type="hidden" name="<?=FORM_CSRF_FIELD?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                            <button class="btn btn-danger d-flex justify-content-end">Delete Post</button>
+                            <button class="btn btn-danger d-flex">Delete Post</button>
                             </form>
                             </div>
                     <?php endif;
                     endif; ?>
                 </div>
-            </footer>
+            </div>
         </article>
         <article class="card m-5">
         <h2 class="card-header text-center">

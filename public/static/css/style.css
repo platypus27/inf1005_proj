@@ -30,6 +30,18 @@ h2 {
   background-color: #90AFC5 !important;
 }
 
+.btn-danger {
+  background-color: white;
+  color: #917885;
+  border: 3px solid #917885;
+}
+
+.btn-primary {
+  background-color: #917885;
+  color: #f0ffce;
+  border: none;
+}
+
 .navbar{
   height: 10rem;
   background-color: #90AFC5;
@@ -232,6 +244,24 @@ form.contactus button{
 form.contactus button:hover{
   background-color: #0000CC;
 
+}
+
+/* posts */
+.d-sm-flex .p-1 {
+  padding: 1rem;
+}
+
+.d-sm-flex .p-1 button, .d-sm-flex .p-1 a, .d-sm-flex .p-1 input{
+  width: 7rem;
+  height: 3rem;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#postheader {
+  padding: 2rem;
 }
 
 /* Friends page */
