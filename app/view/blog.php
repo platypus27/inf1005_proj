@@ -137,14 +137,15 @@ endif;?>
                                     $epoch = (int)($comment['created_at']);
                                     $commentTimeStamp = new DateTime("@$epoch");
                                     ?>
-                                    <span class="border-top"></span>
-                                    <div class="d-sm-flex">
-                                        <p class="p-1 commentloginid"><span><a class="nav-link"
-                                            href="/blog/u/<?= $comment['loginid'] ?>"><?= $comment['loginid'] ?></a></span>
-                                        </p>
-                                        <p class="p-1 commentinfo"><?= $comment['comment'] ?></p>
-                                        <p class="p-1 commentinfo ml-auto"><?= $commentTimeStamp->format('D, j M Y g:i:s A'); ?></p>
-                                    </div>
+                                    <?php foreach ($data['comments'][$x] as $comment) : ?>
+                                        <div class="d-sm-flex">
+                                            <p class="p-2 commentloginid"><span><a class="nav-link"
+                                                href="/blog/u/<?= $comment['loginid'] ?>"><?= $comment['loginid'] ?></a></span>
+                                            </p>
+                                            <p class="p-1 commentinfo"><?= $comment['comment'] ?></p>
+                                            <p class="p-1 commentinfo ml-auto"><?= $commentTimeStamp->format('D, j M Y g:i:s A'); ?></p>
+                                        </div>
+                                    <?php endforeach; ?>
                                 <?php endif; ?>
                                 <?php if(isset($_SESSION[SESSION_LOGIN])) :?>
                                     <div class="card-body">                    

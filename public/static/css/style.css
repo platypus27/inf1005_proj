@@ -61,6 +61,7 @@ h2 {
   font-size: medium;
   font-weight: bold;
   color: #917885 !important;
+  min-width: 10rem;
 }
 
 .commentinfo {
