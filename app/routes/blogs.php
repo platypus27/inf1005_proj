@@ -1,18 +1,21 @@
 <?php
 
 require_once('../app/controllers/BlogsController.php');
+require_once('../app/controllers/BlogController.php');
+require_once('../app/controllers/LikesController.php');
 class blogs extends Router 
 {
     public function all()
     {
         $blogs_control = new BlogsController();
-        // $like_control = new LikesController();
+        $blog_control = new BlogController();
+        $like_control = new LikesController();
         
         //View Blog
 
         //Get All Blog info
         $blogs_info = $blogs_control->getAllPosts();
-        // $blog_like = $like_control->getLikes(1, $UserBlogID);
+        $loginid = $_SESSION[SESSION_LOGIN];
 
         //Check if blog has a post
         if ($blogs_info == null) {
@@ -28,12 +31,31 @@ class blogs extends Router
             $this->view($data);
 
         } else {
+
+            $usr_like = [];
+            $post_like = [];
+            $test = [];
+            for ($x=1;$x<=sizeof($blogs_info);$x++) {
+                require_once '../app/model/Post.php';
+                if(isset($_SESSION[SESSION_LOGIN])){
+                    $usr_id = $blog_control->getUserID($_SESSION[SESSION_LOGIN]);
+                    $usr_like[] = $like_control->getLikes(3, null, $postid = $x);
+                    $post_like[] = $like_control->getLikes(2, null, $postid = $x);
+                }
+            }
+
+            $usr_like = array_reverse($usr_like);
+            $post_like = array_reverse($post_like);
+
             //Set blog info
             $data = [
                 'page' => 'blogs',
-                'total_post' => is_null($blogs_info) ? 0 : sizeof($blogs_info),
-                'blog_info' => $blogs_info
-                // 'total_likes' => $blog_like
+                'blog_name' => $loginid,
+                'blog_info' => $blogs_info,
+                'usr_like' => $usr_like,
+                'likes_count' => $post_like,
+                // 'comment_success' => $isComAdded,
+                'script' => '/static/js/clipboard.js',
             ];
             //Serve /main/blogs with blogs.php
             $this->view($data);

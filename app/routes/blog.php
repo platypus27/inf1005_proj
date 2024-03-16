@@ -80,7 +80,6 @@ class blog extends Router
                         }
                     }
                     foreach ($friendsUsers as $friend) {
-                        $test10=$friend;
                         if ($friend == $_SESSION[SESSION_LOGIN]) {
                             $requested = 'Friends';
                         }
@@ -127,86 +126,62 @@ class blog extends Router
                     }
                 }
 
-                //Check if request for a blog post or view blog
-                if (isset($argv[1])) {
-                    //Go to Blog Post
-
-                    //Check if post exist
-                    $post_info = $blog_control->getPost($UserBlogID, $PostID = $argv[1]);
-                    if ($post_info == null) {
-                        //Post not found
-                        $this->abort(404);
-                    } else {
-                        //Post is found
+                //Get User Blog info
+                $blog_info = $blog_control->getBlog($UserBlogID);
+                $blog_like = $like_control->getLikes(1, $UserBlogID);
+                //Check if blog has a post
+                if ($blog_info == null) {
+                    //This user has no post
+                    //Set blog info
+                    $data = [
+                        'page' => 'blog',
+                        'blog_name' => $loginid,
+                        'total_post' => 0,
+                        'total_likes' => 0,
+                        'requests' => $requested,
+                    ];
+                    //Serve /blog/u/<loginid> with blog.php
+                    $this->view($data);
+                    
+                } else {
+                    $usr_like = [];
+                    $post_like = [];
+                    $test = [];
+                    for ($x=1;$x<=sizeof($blog_info);$x++) {
                         require_once '../app/model/Post.php';
-                        $isComAdded = "";
-                        //Check if a comment is being added
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            //returns true:Comment added, false:Comment not added
-                            $isComAdded = $blog_control->addComments($PostID = $argv[1]);
-                        }
-                        //Get info of Logged in user
-                        $usr_like = null;
                         if(isset($_SESSION[SESSION_LOGIN])){
                             $usr_id = $blog_control->getUserID($_SESSION[SESSION_LOGIN]);
-                            $usr_like = $like_control->getLikes(3, $usr_id, $postid = $argv[1]);
+                            $usr_like[] = $like_control->getLikes(3, null, $postid = $x);
+                            $post_like[] = $like_control->getLikes(2, null, $postid = $x);
                         }
+                    }
+                        // $isComAdded = "";
+                        // //Check if a comment is being added
+                        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        //     //returns true:Comment added, false:Comment not added
+                        //     $isComAdded = $blog_control->addComments($PostID = $x);
+                        // }
 
                         //Get info of the blog post
-                        $post_like = $like_control->getLikes(2, null, $postid = $argv[1]);
-                        $comments = $blog_control->getComments(($post_info[0])->getField('id')->getValue());
-
-                        //Set page data
-                        $data = [
-                            'page' => 'post',
-                            'post_info' => $post_info,
-                            'usr_like' => $usr_like,
-                            'likes_count' => $post_like,
-                            'blog_name' => $loginid,
-                            'comments' => $comments,
-                            'comment_success' => $isComAdded,
-                            'requests' => $requested,
-                            'script' => '/static/js/clipboard.js',
-                        ];
-
-                        //Serve /blog/u/<loginid>/<postid> with post.php
-                        $this->view($data);
-                    }
-                } else {
-                    //View Blog
-
-                    //Get User Blog info
-                    $blog_info = $blog_control->getBlog($UserBlogID);
-                    $blog_like = $like_control->getLikes(1, $UserBlogID);
-
-                    //Check if blog has a post
-                    if ($blog_info == null) {
-                        //This user has no post
-                        //Set blog info
-                        $data = [
-                            'page' => 'blog',
-                            'blog_name' => $loginid,
-                            'total_post' => 0,
-                            'total_likes' => 0,
-                            'requests' => $requested,
-                        ];
-                        //Serve /blog/u/<loginid> with blog.php
-                        $this->view($data);
-                        
-                    } else {
-                        //Set blog info
-                        $data = [
-                            'page' => 'blog',
-                            'blog_name' => $loginid,
-                            'blog_info' => $blog_info,
-                            'total_post' => is_null($blog_info) ? 0 : sizeof($blog_info),
-                            'total_likes' => $blog_like,
-                            'requests' => $requested,
-                        ];
-                        //Serve /blog/u/<loginid> with blog.php
-                        $this->view($data);
-                    }
+                        // $comments = $blog_control->getComments(($post_info[0])->getField('id')->getValue());
+                    
+                    //Set blog info
+                    $usr_like = array_reverse($usr_like);
+                    $post_like = array_reverse($post_like);
+                    $data = [
+                        'page' => 'blog',
+                        'blog_name' => $loginid,
+                        'blog_info' => $blog_info,
+                        'requests' => $requested,
+                        'usr_like' => $usr_like,
+                        'likes_count' => $post_like,
+                        // 'comment_success' => $isComAdded,
+                        'script' => '/static/js/clipboard.js',
+                    ];
+                    //Serve /blog/u/<loginid> with blog.php
+                    $this->view($data);
                 }
+                
             }
         }
     }

@@ -31,7 +31,7 @@
 <body>
     <nav class="navbar navbar-expand-sm py-1">
         <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN || $_SESSION[SESSION_RIGHTS] == AUTH_ADMIN)  : ?>
-            <a class="nav-brand" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>">   
+            <a class="nav-brand" href="/blogs/all">   
         <?php else : ?>
             <a class="nav-brand" href="/">
         <?php endif; ?>
