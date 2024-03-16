@@ -46,8 +46,6 @@ class blogs extends Router
 
             $usr_like = array_reverse($usr_like);
             $post_like = array_reverse($post_like);
-            $comments = array_reverse($comments);
-
             //Set blog info
             $data = [
                 'page' => 'blogs',

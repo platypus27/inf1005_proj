@@ -145,7 +145,6 @@ class blog extends Router
                 } else {
                     $usr_like = [];
                     $post_like = [];
-                    $test = [];
                     $comments = [];
                     for ($x=1;$x<=sizeof($blog_info);$x++) {
                         require_once '../app/model/Post.php';
@@ -163,7 +162,6 @@ class blog extends Router
                     //Set blog info
                     $usr_like = array_reverse($usr_like);
                     $post_like = array_reverse($post_like);
-                    $comments = array_reverse($comments);
                     $data = [
                         'page' => 'blog',
                         'blog_name' => $loginid,

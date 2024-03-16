@@ -227,20 +227,20 @@ class BlogController{
         }
     }
 
-      /**
-       * sanitize user input
-       * 
-       * @param string input to be sanitize
-       * 
-       * @return string santize input
-       */
-      public function sanitize_input($input)
-      {
-          $input = trim($input);
-          $input = stripslashes($input);
-          $input = htmlspecialchars($input);
-          return $input;
-      }
+    /**
+     * sanitize user input
+     * 
+     * @param string input to be sanitize
+     * 
+     * @return string santize input
+     */
+    public function sanitize_input($input)
+    {
+        $input = trim($input);
+        $input = stripslashes($input);
+        $input = htmlspecialchars($input);
+        return $input;
+    }
 
 
 }
