@@ -147,6 +147,8 @@ class blog extends Router
                     $usr_like = [];
                     $post_like = [];
                     $test = [];
+                    $comments = [];
+                    $isComAdded = "";
                     for ($x=1;$x<=sizeof($blog_info);$x++) {
                         require_once '../app/model/Post.php';
                         if(isset($_SESSION[SESSION_LOGIN])){
@@ -154,16 +156,14 @@ class blog extends Router
                             $usr_like[] = $like_control->getLikes(3, null, $postid = $x);
                             $post_like[] = $like_control->getLikes(2, null, $postid = $x);
                         }
+                        // Get info of the blog post
+                        $comments[] = $blog_control->getComments(($blog_info[$x-1])->getField('id')->getValue());
                     }
-                        // $isComAdded = "";
-                        // //Check if a comment is being added
-                        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        //     //returns true:Comment added, false:Comment not added
-                        //     $isComAdded = $blog_control->addComments($PostID = $x);
-                        // }
-
-                        //Get info of the blog post
-                        // $comments = $blog_control->getComments(($post_info[0])->getField('id')->getValue());
+                    //Check if a comment is being added
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        //returns true:Comment added, false:Comment not added
+                        $isComAdded = $blog_control->addComments($PostID = $x);
+                    }
                     
                     //Set blog info
                     $usr_like = array_reverse($usr_like);
@@ -175,7 +175,8 @@ class blog extends Router
                         'requests' => $requested,
                         'usr_like' => $usr_like,
                         'likes_count' => $post_like,
-                        // 'comment_success' => $isComAdded,
+                        'comments' => $comments,
+                        'comment_success' => $isComAdded,
                         'script' => '/static/js/clipboard.js',
                     ];
                     //Serve /blog/u/<loginid> with blog.php
