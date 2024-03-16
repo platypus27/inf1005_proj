@@ -150,7 +150,7 @@ endif;?>
                                     <?php endif; ?>
                                     <?php if(isset($_SESSION[SESSION_LOGIN])) :?>
                                         <div class="card-body">                    
-                                            <form class="form-group" action="<?= (parse_url($_SERVER['REQUEST_URI']))['path'] ?>" method="post">
+                                            <form class="form-group" action="/blog/addComment/<?= $x ?> " method="post">
                                                 <label class="form-group" style="display:none;"><?= $_SESSION[SESSION_LOGIN] ?></label>
                                                 <div class="row pb-2 pl-5 pr-2">
                                                     <span class="input-group">

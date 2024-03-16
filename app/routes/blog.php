@@ -96,7 +96,6 @@ class blog extends Router
 
                     // check if there is any ongoing requests eitherway
                     if ($friend_requests != null || $sent_requests != null) {
-                        $test1 = "yes";
                         // check if the user has already sent a request
                         if ($friend_requests != null) {
                             $test2 = "yes";
@@ -148,26 +147,23 @@ class blog extends Router
                     $post_like = [];
                     $test = [];
                     $comments = [];
-                    $isComAdded = "";
                     for ($x=1;$x<=sizeof($blog_info);$x++) {
                         require_once '../app/model/Post.php';
                         if(isset($_SESSION[SESSION_LOGIN])){
                             $usr_id = $blog_control->getUserID($_SESSION[SESSION_LOGIN]);
-                            $usr_like[] = $like_control->getLikes(3, null, $postid = $x);
+                            $usr_like[] = $like_control->getLikes(3, $usr_id, $postid = $x);
                             $post_like[] = $like_control->getLikes(2, null, $postid = $x);
                         }
                         // Get info of the blog post
                         $comments[] = $blog_control->getComments(($blog_info[$x-1])->getField('id')->getValue());
                     }
                     //Check if a comment is being added
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        //returns true:Comment added, false:Comment not added
-                        $isComAdded = $blog_control->addComments($PostID = $x);
-                    }
+                    
                     
                     //Set blog info
                     $usr_like = array_reverse($usr_like);
                     $post_like = array_reverse($post_like);
+                    $comments = array_reverse($comments);
                     $data = [
                         'page' => 'blog',
                         'blog_name' => $loginid,
@@ -176,7 +172,6 @@ class blog extends Router
                         'usr_like' => $usr_like,
                         'likes_count' => $post_like,
                         'comments' => $comments,
-                        'comment_success' => $isComAdded,
                         'script' => '/static/js/clipboard.js',
                     ];
                     //Serve /blog/u/<loginid> with blog.php
@@ -466,5 +461,15 @@ class blog extends Router
             //User is creating a post
             header("Location: /blog/u/" . $argv[0]);
         }
+    }
+
+    protected function addComment($argv) {
+        require_once('../app/controllers/BlogController.php');
+        $blog_control = new BlogController();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //returns true:Comment added, false:Comment not added
+            $blog_control->addComments($argv[0]+1);
+        }
+        header("Location: /blog/u/" . $_SESSION[SESSION_LOGIN]);
     }
 }
