@@ -34,13 +34,45 @@ h2 {
   background-color: white;
   color: #917885;
   border: 3px solid #917885;
+  padding: 0.7rem 2rem;
+  border-radius: 1rem;
+}
+
+.btn-danger:hover {
+  background-color: #917885;
+  color: #f0ffce;
+  border: none;
 }
 
 .btn-primary {
   background-color: #917885;
   color: #f0ffce;
-  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 1rem;
 }
+
+.btn-primary:hover {
+  background-color: white;
+  outline: 3px solid #917885;
+  color: #917885;
+}
+
+.commentloginid a{
+  font-size: medium;
+  font-weight: bold;
+  color: #917885 !important;
+}
+
+.commentinfo {
+  padding-top: 2rem !important;
+}
+
+.comment-box {
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem !important;
+}
+
 
 .navbar{
   height: 10rem;
@@ -49,10 +81,6 @@ h2 {
   padding: 0 3rem 0 5rem;
   font-weight: bold;
 }
-
-/* #navbarSupportedContent {
-  display: none !important;
-} */
 
 a.nav-link{
   color: #FFC2C3;
@@ -593,15 +621,15 @@ button span:after {
 }
 
 .classname::-webkit-scrollbar-track {
-      background-color: rgba(24, 44, 79, 0.2);
-    	border: none;
+  background-color: rgba(24, 44, 79, 0.2);
+  border: none;
 }
 
 .classname::-webkit-scrollbar {
-    width: 6px;
-    background-color: rgba(24, 44, 79, 0.2);
+  width: 6px;
+  background-color: rgba(24, 44, 79, 0.2);
 }
 
 .classname::-webkit-scrollbar-thumb {
-    background-color: rgba(24, 44, 79, 1);
+  background-color: rgba(24, 44, 79, 1);
 }

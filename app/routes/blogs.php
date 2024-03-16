@@ -43,9 +43,8 @@ class blogs extends Router
                 }
                 $comments[] = $blog_control->getComments(($blogs_info[$x-1])->getField('id')->getValue());
             }
-
-            $usr_like = array_reverse($usr_like);
-            $post_like = array_reverse($post_like);
+            $blogs_info = array_reverse($blogs_info);
+            $comments = array_reverse($comments);
             //Set blog info
             $data = [
                 'page' => 'blogs',
@@ -68,7 +67,7 @@ class blogs extends Router
             //returns true:Comment added, false:Comment not added
             $blog_control->addComments($argv[0]+1);
         }
-        header("Location: /blog/u/" . $_SESSION[SESSION_LOGIN]);
+        header("Location: /blogs/all");
     }
 }
 ?>
