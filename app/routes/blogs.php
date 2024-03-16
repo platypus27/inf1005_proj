@@ -34,7 +34,7 @@ class blogs extends Router
 
             $usr_like = [];
             $post_like = [];
-            $test = [];
+            $comments = [];
             for ($x=1;$x<=sizeof($blogs_info);$x++) {
                 require_once '../app/model/Post.php';
                 if(isset($_SESSION[SESSION_LOGIN])){
@@ -42,10 +42,12 @@ class blogs extends Router
                     $usr_like[] = $like_control->getLikes(3, $usr_id, $postid = $x);
                     $post_like[] = $like_control->getLikes(2, null, $postid = $x);
                 }
+                $comments[] = $blog_control->getComments(($blogs_info[$x-1])->getField('id')->getValue());
             }
 
             $usr_like = array_reverse($usr_like);
             $post_like = array_reverse($post_like);
+            $comments = array_reverse($comments);
 
             //Set blog info
             $data = [
@@ -54,13 +56,22 @@ class blogs extends Router
                 'blog_info' => $blogs_info,
                 'usr_like' => $usr_like,
                 'likes_count' => $post_like,
-                // 'comment_success' => $isComAdded,
+                'comments' => $comments,
                 'script' => '/static/js/clipboard.js',
             ];
             //Serve /main/blogs with blogs.php
             $this->view($data);
         }
         
+    }
+    protected function addComment($argv) {
+        require_once('../app/controllers/BlogController.php');
+        $blog_control = new BlogController();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //returns true:Comment added, false:Comment not added
+            $blog_control->addComments($argv[0]+1);
+        }
+        header("Location: /blog/u/" . $_SESSION[SESSION_LOGIN]);
     }
 }
 ?>

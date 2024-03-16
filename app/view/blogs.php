@@ -56,6 +56,48 @@
                                             data-clipboard-text="<?= $link ?>">Share</button>
                                 </div>
                             </div>
+                            <div class="dropdown show">
+                                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="col text-right pr-1"><?= sizeof($data['comments'][$x]) ?></span>
+                                    <span class="col text-left pl-0">comments</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <?php if (!empty($data['comments'][$x])) : ?>
+                                        <?php $comment = $data['comments'][$x][0]; ?>
+                                        <?php
+                                        $epoch = (int)($comment['created_at']);
+                                        $commentTimeStamp = new DateTime("@$epoch");
+                                        ?>
+                                        <span class="border-top"></span>
+                                        <div class="card-body pb-2 pl-5 pr-2">
+                                            <p><span><a class="nav-link"
+                                                href="/blog/u/<?= $comment['loginid'] ?>"><?= $comment['loginid'] ?></a></span>
+                                            </p>
+                                            <p class="card-text"><?= $comment['comment'] ?></p>
+                                            <p class="card-text"><?= $commentTimeStamp->format('D, j M Y g:i:s A'); ?></p>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if(isset($_SESSION[SESSION_LOGIN])) :?>
+                                        <div class="card-body">                    
+                                            <form class="form-group" action="/blog/addComment/<?= $x ?> " method="post">
+                                                <label class="form-group" style="display:none;"><?= $_SESSION[SESSION_LOGIN] ?></label>
+                                                <div class="row pb-2 pl-5 pr-2">
+                                                    <span class="input-group">
+                                                        <textarea class="form-control comment-box" rows="5" aria-label="With textarea" name="comment" required></textarea>
+                                                    </span>
+                                                </div>
+                                                <div class="row pb-2 pl-5">
+                                                    <span class="input-group">
+                                                        <input type="hidden" name="<?=FORM_CSRF_FIELD?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                                        <input class="btn btn-primary" type="submit" name="submit">
+                                                    </span>
+                                                </div>
+                                            </form>
+                                            <span class="border-top"></span>
+                                        </div>
+                                    <?php endif;?>
+                                </div> 
+                            </div>
                         </div>
                     </article>
                 <?php endfor; ?>
