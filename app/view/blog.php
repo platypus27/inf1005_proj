@@ -69,9 +69,6 @@ endif;?>
                                     <?= $content ?>
                                 </p>
                             </div>
-                            <div class="row">
-                                <p class="col text-right pl-0"><?= $data['likes_count'][$x] ?> likes</p>
-                            </div>
                             <h6 class="row">
                                     <?php
                                     $epochCreated = (int)($entry->getField('created_at')->getValue());

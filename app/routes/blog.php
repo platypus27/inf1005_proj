@@ -57,8 +57,8 @@ class blog extends Router
             $this->abort(404);
         } else {
             //loginid in route
-            $loginid = $argv[0];
-            $UserBlogID = $blog_control->getUserID($loginid);
+            $loginid = $blog_control->getUserID($_SESSION[SESSION_LOGIN]);
+            $UserBlogID = $blog_control->getUserID($argv[0]);
 
             //Checks if the user exist
             if ($UserBlogID == null) {
@@ -68,59 +68,43 @@ class blog extends Router
                 //User Exist
                 $requested = null;
                 // get friends
-                $UserID = $friends_control->getUserID($loginid);
-                $friendsList = $friends_control->getFriends($UserID);
-                if ($friendsList != null) {
-                    foreach ($friendsList as $f) {
-                        if ($f->getFriendA()->getValue() != $UserID){
-                            $friendsUsers[] = $friends_control->getLoginID($f->getFriendA()->getValue());
-                        }
-                        elseif ($f->getFriendB()->getValue() != $UserID){
-                            $friendsUsers[] = $friends_control->getLoginID($f->getFriendB()->getValue());
-                        }
+                $friendsList = $friends_control->getFriends($UserBlogID);
+                // get friend requests
+                $friend_requests = $friends_control->getFriendRequests($loginid);
+                $sent_requests = $friends_control->getSentRequests($loginid);
+                foreach ($friendsList as $f) {
+                    if ($f->getFriendA()->getValue() != $UserBlogID){
+                        $friendsUsers[] = $friends_control->getLoginID($f->getFriendA()->getValue());
                     }
+                    elseif ($f->getFriendB()->getValue() != $UserBlogID){
+                        $friendsUsers[] = $friends_control->getLoginID($f->getFriendB()->getValue());
+                    }
+                }
+                if ($friendsList != null) {
                     foreach ($friendsUsers as $friend) {
                         if ($friend == $_SESSION[SESSION_LOGIN]) {
                             $requested = 'Friends';
                         }
                     }
                 }
-                elseif ($loginid == $_SESSION[SESSION_LOGIN]) {
+                if ($argv[0] == $_SESSION[SESSION_LOGIN]) {
                     $requested = 'MYSELF';
                 }
-                else {
-                    // not currently a friend
-                    // get friend requests
-                    $friend_requests = $friends_control->getFriendRequests($UserBlogID);
-                    $sent_requests = $friends_control->getSentRequests($UserBlogID);
-
-                    // check if there is any ongoing requests eitherway
-                    if ($friend_requests != null || $sent_requests != null) {
-                        // check if the user has already sent a request
-                        if ($friend_requests != null) {
-                            $test2 = "yes";
-                            foreach ($friend_requests as $f) {
-                                $test3 = "yes";
-                                $req = $friends_control->getLoginID($f->getUserID()->getValue());
-                                if ($req == $_SESSION[SESSION_LOGIN]) {
-                                    $test4 = "yes";
-                                    $requested = 'Requested';
-                                    break;
-                                }
-                            }
+                if ($friend_requests != null){
+                    foreach ($friend_requests as $f) {
+                        $req = $friends_control->getLoginID($f->getUserID()->getValue());
+                        if ($req == $argv[0]) {
+                            $requested = 'Accept Request';
+                            break;
                         }
-                        // check if the user has already received a request
-                        elseif ($sent_requests != null) {
-                            foreach ($sent_requests as $f) {
-                                $req = $friends_control->getLoginID($f->getUserID()->getValue());
-                                if ($req == $argv[0]) {
-                                    $requested = 'Accept Request';
-                                    break;
-                                }
-                            }
-                        }
-                        else {
-                            $requested = null;
+                    }
+                }
+                if ($sent_requests != null){
+                    foreach ($sent_requests as $s) {
+                        $req = $friends_control->getLoginID($s->getFriendID()->getValue());
+                        if ($req == $argv[0]) {
+                            $requested = 'Requested';
+                            break;
                         }
                     }
                 }
@@ -134,7 +118,7 @@ class blog extends Router
                     //Set blog info
                     $data = [
                         'page' => 'blog',
-                        'blog_name' => $loginid,
+                        'blog_name' => $argv[0],
                         'total_post' => 0,
                         'total_likes' => 0,
                         'requests' => $requested,
@@ -164,7 +148,7 @@ class blog extends Router
                     $comments = array_reverse($comments);
                     $data = [
                         'page' => 'blog',
-                        'blog_name' => $loginid,
+                        'blog_name' => $argv[0],
                         'blog_info' => $blog_info,
                         'requests' => $requested,
                         'usr_like' => $usr_like,

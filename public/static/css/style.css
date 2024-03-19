@@ -338,6 +338,18 @@ form.contactus button:active{
   background-color: white;
 }
 
+.card.m-1.friends {
+  background-color: #90AFC5;
+}
+
+.friends.d-flex.flex-column {
+  padding: 2rem;
+}
+
+.friendbox {
+  padding: 1rem;;
+}
+
 #login {
   padding: 2rem;
 }
