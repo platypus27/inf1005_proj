@@ -1,21 +1,21 @@
 # INF1005 Final Project
 Social Media Web Application
-
+  
 ## Features
-Users
-Friends
-Posts
-Comments
-Likes
-Contact Admin
-Admin Features
-    - Add Admin permissions
-    - Suspend Users
-
+Users  
+Friends  
+Posts  
+Comments  
+Likes  
+Contact Admin  
+Admin Features  
+    - Add Admin permissions  
+    - Suspend Users  
+  
 ## How to run locally
 ### Setup MySQL
-Set up MySQL locally
-Run database/test.sql
+Set up MySQL locally  
+Run database/test.sql  
 ### Requirements
 Configure database.php under app/private
 File should look something like this
@@ -30,7 +30,7 @@ define('DATABASE_NAME', 'db-name');
 ### Commands to run
 cd public  
 php -S localhost:8000
-
+  
 ## How to host live
 For this project, we are hosting this website on a Ubuntu VM using Google Cloud  
 ### Configure Apache Server
@@ -40,7 +40,7 @@ sudo chown -R inf1005-dev:www-data /var/www/html
 sudo chmod 2775 /var/www/html  
 find /var/www/html -type d -exec sudo chmod 2775 {} \;  
 find /var/www/html -type f -exec sudo chmod 0664 {} \;  
-# Configure MySQL
+### Configure MySQL
 sudo apt install mysql-server  
 sudo mysql  
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourRootPasswordHere';  
