@@ -1,5 +1,5 @@
 <section class='card border-dark mb-3' id="profile">
-    <h1 class="card-header" style="color:#FFC2C3; font-weight:bold;">profile settings</h1>
+    <h2 class="card-header" style="color:#FFC2C3; font-weight:bold;">profile settings</h2>
     <form class="profile card-body" method="post" action="/account/update_profile">
         <div id="exTab3" class="container">	
             <ul  class="nav nav-pills">
@@ -16,52 +16,52 @@
                                 unset($_SESSION['msg']);
                             }
                         ?>
-                        <label>User Id:</label>
+                        <label>user id:</label>
                         <div class="form-group">
                             <?php
                                 $user = $data['loginid'];
-                                echo '<input class="form-group" type="text" name="userid" placeholder="Enter Your user id" maxlength="50" value=' . $user . ' aria-label="loginid">';
+                                echo '<input class="form-group" type="text" name="userid" placeholder="enter Your user id" maxlength="50" value=' . $user . ' aria-label="loginid">';
                             ?>
                         </div>
 
-                        <label>Email:</label>
+                        <label>email:</label>
                         <div class="form-group">
                             <?php
                                 $email = $data['email'];
-                                echo '<input class="form-group" type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Enter Your new Email" maxlength="100" value=' . $email . ' aria-label="email">';
+                                echo '<input class="form-group" type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="enter Your new Email" maxlength="100" value=' . $email . ' aria-label="email">';
                             ?>
                         </div>
 
-                        <label>Name:</label>
+                        <label>name:</label>
                         <div class="form-group">
                         <?php
                             $name = $data['name'];
-                            echo '<input class="form-group" type="text" name="name" placeholder="Enter Your new Name" maxlength="50"     value=' . $name . ' aria-label="name">';
+                            echo '<input class="form-group" type="text" name="name" placeholder="enter Your new Name" maxlength="50"     value=' . $name . ' aria-label="name">';
                         ?>
-                        <button class="btn btn-primary float-right" type="submit" name="update" value="bprofile">Update Profile</button>
+                        <button class="btn btn-primary float-right" type="submit" name="update" value="bprofile">update profile</button>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane" id="2b">
                     <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <label>Current Password:</label>
+                        <label>current password:</label>
                         <div class="form-group">
-                            <input class="form-group" type="password" minlength="8" name="cpassword" placeholder="Enter current password" aria-label="cpassword">
+                            <input class="form-group" type="password" minlength="8" name="cpassword" placeholder="enter current password" aria-label="cpassword">
                         </div>
 
-                        <label>New Password:</label>
+                        <label>new password:</label>
                         <div class="form-group">
-                            <input class="form-group" type="password" title="Password must contain at least 8 characters, including UPPER/lowercase and numbers." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" name="npassword" placeholder="Enter new password" aria-label="npassword">
+                            <input class="form-group" type="password" title="Password must contain at least 8 characters, including UPPER/lowercase and numbers." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" name="npassword" placeholder="enter new password" aria-label="npassword">
                         </div>
 
-                        <label>Confirm New Password:</label>
+                        <label>confirm new password:</label>
                         <div class="form-group">
-                            <input class="form-group" type="password" minlength="8" name="ncpassword" placeholder="Enter new confirm password" aria-label="ncpassword">
-                            <button class="btn btn-primary float-right" type="submit" name="update" value="bpassword">Change Password</button>
+                            <input class="form-group" type="password" minlength="8" name="ncpassword" placeholder="enter new confirm password" aria-label="ncpassword">
+                            <button class="btn btn-primary float-right" type="submit" name="update" value="bpassword">change password</button>
                         </div>
 
                         
-                        <label id="profilenote">Note: if you change your password, your password will be updated on your next sign in</label>
+                        <label id="profilenote">note: if you change your password, your password will be updated on your next sign in</label>
                         <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>"></div>
                     </div>
                 </div>

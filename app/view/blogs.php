@@ -67,12 +67,11 @@
                                         $commentTimeStamp = new DateTime("@$epoch");
                                         ?>
                                         <?php foreach ($data['comments'][$x] as $comment) : ?>
-                                            <div class="d-sm-flex">
-                                                <p class="p-2 commentloginid"><span><a class="nav-link"
+                                            <div class="d-sm-flex flex-column" id="commentbox">
+                                                <p class="p-1 commentloginid"><span><a class="nav-link"
                                                     href="/blog/u/<?= $comment['loginid'] ?>"><?= $comment['loginid'] ?></a></span>
                                                 </p>
                                                 <p class="p-1 commentinfo"><?= $comment['comment'] ?></p>
-                                                <p class="p-1 commentinfo ml-auto"><?= $commentTimeStamp->format('D, j M Y g:i:s A'); ?></p>
                                             </div>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
