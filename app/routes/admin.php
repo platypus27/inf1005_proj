@@ -34,10 +34,10 @@ class admin extends Router{
             if (count($user) > 1) {
                 $user = $user[0];
             }
-            self::view(['page'=>'admin/users/specific', 'user'=>$user, 'script'=>'/static/js/admin/action.js']);
+            self::view(['page'=>'admin/users/specific', 'user'=>$user, 'script'=>'../public/static/js/admin/action.js']);
         } else {
             $users = get_user(['id', 'loginid', 'email', 'name', 'isadmin', 'suspended']);
-            self::view(['page'=>'admin/users/all', 'users'=>$users, 'script'=>'/static/js/admin/action.js']);
+            self::view(['page'=>'admin/users/all', 'users'=>$users, 'script'=>'../public/static/js/admin/action.js']);
         }
     }
 
@@ -78,7 +78,7 @@ class admin extends Router{
                 if ($contact === NULL){
                     $this->abort(404);
                 }
-                self::view(['page'=>'admin/contact/specific', 'contact'=>$contact, 'script'=>'/static/js/admin/action.js']);
+                self::view(['page'=>'admin/contact/specific', 'contact'=>$contact, 'script'=>'../public/static/js/admin/action.js']);
             } else {
                 $contact = get_contactus('*');
                 self::view(['page'=>'admin/contact/all', 'contact'=>$contact]);

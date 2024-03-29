@@ -5,7 +5,7 @@
     <title>tint</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="SHORTCUT ICON" href="/static/image/icon.ico" type="image/x-icon" />
+    <link rel="SHORTCUT ICON" href= "/public/static/image/icon.ico" type="image/x-icon" />
     <!--jQuery-->
     <script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -18,84 +18,106 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <!--Custom JS -->
+    <script>
+        function animation(x) {
+            var children = x.children;
+            for (var i = 0; i < children.length; i++) {
+                children[i].classList.toggle("change");
+            }
+        }
+    </script>
+
     <?php
     if (isset($data['script'])) {
         $script = $data['script'];
         echo "<script defer src=\"$script\"></script>";
     }
     ?>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/public/static/css/style.css">
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm py-1">
-        <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN || $_SESSION[SESSION_RIGHTS] == AUTH_ADMIN)  : ?>
-            <a class="nav-brand" href="/blogs/all">   
-        <?php else : ?>
-            <a class="nav-brand" href="/">
-        <?php endif; ?>
-            <img class="rounded-circle" src="/static/image/logo.jpg" id="logo" alt="Home" />
-        </a>
-        <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse mr-auto d-flex justify-content-end" id="navbarSupportedContent">
-            <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
-                <div id="cover">
-                    <form class="searchbar" method="post" action="/search" method="get" action="">
-                        <div class="tb">
-                            <div class="td">
-                                <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required></div>
-                                <div class="td" id="s-cover">
-                                <button type="submit">
-                                <div id="s-circle"></div>
-                                <span></span>
-                                </button>
-                            </div>
+    <nav class="navbar navbar-expand-lg">
+        
+        <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
+            <a class="nav-brand" href="/blogs/all">
+            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home" />
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="navicon" onclick="animation(this)">   
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div> 
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-0">
+                    <li class="nav-item">
+                        <div id="cover">
+                            <form class="searchbar" method="post" action="/search" method="get" action="">
+                                <div class="tb">
+                                    <div class="td">
+                                        <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                        <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required></div>
+                                        <div class="td" id="s-cover">
+                                        <button type="submit">
+                                        <div id="s-circle"></div>
+                                        <span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-            <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
-                <ul class="navbar-nav mr-auto">
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/u">manage</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/contact">contacts</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signout">sign out</a>
+                    </li>
                 </ul>
-                <div id="cover" style="width:62rem;">
-                    <form class="searchbar" method="post" action="/search" method="get" action="">
-                        <div class="tb">
-                            <div class="td">
-                                <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required></div>
-                                <div class="td" id="s-cover">
-                                <button type="submit">
-                                <div id="s-circle"></div>
-                                <span></span>
-                                </button>
-                            </div>
+                
+            </div>
+        <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
+            <a class="nav-brand" href="/blogs/all">
+            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="navicon" onclick="animation(this)">   
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div> 
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-0">
+                    <li class="nav-item">
+                        <div id="cover">
+                            <form class="searchbar" method="post" action="/search" method="get" action="">
+                                <div class="tb">
+                                    <div class="td">
+                                        <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                        <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required></div>
+                                        <div class="td" id="s-cover">
+                                        <button type="submit">
+                                        <div id="s-circle"></div>
+                                        <span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-            <?php else : ?>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/main/aboutus">about us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/main/contactus">contact us</a>
-                    </li>
-                </ul>
-            <?php endif; ?>
-
-            <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
-                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>"><?= $_SESSION[SESSION_LOGIN] ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/friends/u">friends</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/blog/create">create</a>
@@ -107,20 +129,27 @@
                         <a class="nav-link" href="/signout">sign out</a>
                     </li>
                 </ul>
-            <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
-                <ul class="navbar-nav">
+                
+            </div>
+        <?php else : ?>
+            <a class="nav-brand" href="/">
+            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="navicon" onclick="animation(this)">   
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div> 
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>"><?= $_SESSION[SESSION_LOGIN] ?></a>
+                        <a class="nav-link" href="/main/aboutus">about us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/account/profile">profile</a>
+                        <a class="nav-link" href="/main/contactus">contact us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/signout">sign out</a>
-                    </li>       
-                </ul>
-            <?php else : ?>
-                <ul class="nav navbar-nav navbar-right" id="signin">
                     <li class="nav-item pr-3">
                         <a class="nav-link" href="/login" title="Sign In"><i class="fas fa-sign-in-alt fa-lg"></i></a>
                     </li>
@@ -128,9 +157,9 @@
                         <a class="nav-link" href="/register" title="Sign Up"><i class="fas fa-user-plus fa-lg"></i></a>
                     </li>
                 </ul>
-
-            <?php endif; ?>
-        </div>
+                
+            </div>
+        <?php endif; ?>
     </nav>
     <main <?= $data['page'] == 'main' ? "" : "class=\"container\""; ?>>
         <?php
