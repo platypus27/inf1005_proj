@@ -279,6 +279,15 @@ form.profile button:hover{
   border-width: 0;
   background-color: #90AFC5;
 }
+h1 {
+  font-size: 48px;
+  color: #fff; /* Text color */
+  text-align: center;
+  margin-top: 50px; /* Adjust as needed */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+  /* Add any other styles you like */
+}
+
 
 #contact{
   margin: auto;

@@ -7,5 +7,5 @@ if ($_GET['timeout']):?>
     </article>
 <?php endif;
 endif; ?>
-    <h1>placeholder idk</h1>
+    <h1>Welcome to Tint!</h1>
 </div>

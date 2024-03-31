@@ -28,19 +28,20 @@
 
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-sm py-1">
+    <body>
+        <nav class="navbar navbar-expand-sm py-1">
         <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN || $_SESSION[SESSION_RIGHTS] == AUTH_ADMIN)  : ?>
-            <a class="nav-brand" href="/blogs/all">   
+            <a class="navbar-brand" href="/blogs/all">   
         <?php else : ?>
-            <a class="nav-brand" href="/">
+            <a class="navbar-brand" href="/">
         <?php endif; ?>
             <img class="rounded-circle" src="/static/image/logo.jpg" id="logo" alt="Home" />
         </a>
-        <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse mr-auto d-flex justify-content-end" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
                 <div id="cover">
                     <form class="searchbar" method="post" action="/search" method="get" action="">
