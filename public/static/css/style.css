@@ -118,6 +118,8 @@ h2 {
   display: flex;
   padding: 0 3rem 0 5rem;
   font-weight: bold;
+  position: relative; /* Ensure the navbar is positioned */
+  z-index: 1000; /* Set a high z-index to ensure it overlays other content */
 }
 
 a.nav-link{
