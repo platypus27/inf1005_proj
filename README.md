@@ -54,3 +54,20 @@ sudo vim /etc/apache2/apache2.conf
 sudo vim /etc/apache2/sites-available/000-default.conf   
     - change DocumentRoot > /var/www/html  
 sudo systemctl restart apache2  
+### Add HTTPS and SSL
+#### Configure Linux Server
+sudo apt install openssl
+openssl genrsa -out mysite.key 2048
+openssl req -new -x509 -key mysite.key -out mysite.crt -days 365
+sudo cp mysite.key /etc/ssl/private/
+sudo cp mysite.crt /etc/ssl/certs/
+sudo chmod 600 /etc/ssl/private/mysite.key
+#### Configure Web Server
+sudo a2enmod ssl
+sudo a2ensite default-ssl
+sudo systemctl restart apache2
+
+sudo nano '/etc/apache2/sites-available/default-ssl.conf'
+SSLCertificateFile /etc/ssl/certs/mysite.crt
+SSLCertificateKeyFile /etc/ssl/certs/mysite.key
+sudo systemctl restart apache2
