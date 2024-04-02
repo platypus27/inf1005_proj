@@ -7,5 +7,7 @@ if ($_GET['timeout']):?>
     </article>
 <?php endif;
 endif; ?>
-    <h1>placeholder idk</h1>
+    <div>
+        <img class="mainbg" src="/public/static/image/background.jpg" alt="background">
+    </div>
 </section>

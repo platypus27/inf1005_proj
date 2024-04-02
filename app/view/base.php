@@ -173,5 +173,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
-
+<?php if($data['page'] == 'main'): ?>
+<footer>
+    <div class="footercont">
+        <img src="/public/static/image/logo.jpg" id="footer-logo" alt="footerimg">
+        <h4 class="p-2">tint inc.</h4>
+    </div>
+</footer>
+<?php endif; ?>
 </html>
