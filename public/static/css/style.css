@@ -18,17 +18,38 @@ body{
 }
 
 main{
-  min-height: 90vh; /* will cover the 100% of viewport */
+  min-height: 80vh;
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 100px; /* height of your footer */
+  border-radius: unset;
+}
+
+.mainbg {
+  height: 100%;
+  width: 100%;
+  border-radius: unset;
 }
 
 h2 {
   color: #FFC2C3;
   background-color: #90AFC5 !important;
   font-weight: bold;
+}
+
+#footer-logo {
+  width: 3rem;
+  height: 3rem;
+  border-radius: unset;
+}
+
+.footercont {
+  background-color: white;
+  border-radius: unset;
+  height: 5rem;
+  display: flex;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
 }
 
 .btn-danger {
@@ -749,5 +770,12 @@ button span#search:after {
   .nav-link {
     font-size: large;
     padding: 0 1rem !important;
+  }
+}
+
+@media screen and (max-width: 1270px) {
+  .mainpage {
+    position: absolute;
+    bottom: 0;
   }
 }
