@@ -297,6 +297,10 @@ form.profile button:hover{
   color: red;
 }
 
+.card.m-1 {
+  padding: 1rem;
+}
+
 .card.border-0.m-3 {
   padding: 1.5rem;
   background-color: #90AFC5;
@@ -369,7 +373,7 @@ form.contactus button:active{
 }
 
 .postheader {
-  padding: 2rem;
+  padding: 2rem !important;
 }
 
 /* Friends page */
@@ -540,6 +544,7 @@ margin:auto;
   border-radius: 1rem;
   color: black;
   border: none;
+  margin-bottom: 0 !important;
   /* border: 10px solid #FFC2C3; */
 }
 
