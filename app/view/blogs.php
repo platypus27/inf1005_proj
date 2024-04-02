@@ -6,7 +6,7 @@
                 <?php for ($x=0;$x<count($data['blog_info']);$x++) : ?>
                     <?php $entry = $data['blog_info'][$x]; ?>
                     <article class="card m-5">
-                        <div class="card-header" id="postheader">
+                        <div class="card-header postheader">
                             <p class="card-text blog-post" style="font-size:xx-large;"><?= $entry->getField('title')->getValue() ?></p>
                             <div class="card-body">
                                 <p class="card-text blog-post">
@@ -52,7 +52,7 @@
                                 <div class="p-1">
                                     <?php //Get Full url
                                     $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>
-                                    <button class="btn btn-primary" id="share-btn"
+                                    <button class="btn btn-primary share-btn"
                                             data-clipboard-text="<?= $link ?>">Share</button>
                                 </div>
                                 <div class="p-1 ml-auto">
@@ -67,7 +67,7 @@
                                         $commentTimeStamp = new DateTime("@$epoch");
                                         ?>
                                         <?php foreach ($data['comments'][$x] as $comment) : ?>
-                                            <div class="d-sm-flex flex-column" id="commentbox">
+                                            <div class="d-sm-flex flex-column commentbox">
                                                 <p class="p-1 commentloginid"><span><a class="nav-link"
                                                     href="/blog/u/<?= $comment['loginid'] ?>"><?= $comment['loginid'] ?></a></span>
                                                 </p>
@@ -88,10 +88,8 @@
                                                 </span>
                                             </form>
                                             <span class="border-top"></span>
-                                        </div>
                                     <?php endif;?>
-                                </div>
-                            </div> 
+                                </div> 
                         </div>
                     </article>
                 <?php endfor; ?>

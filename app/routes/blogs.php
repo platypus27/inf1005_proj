@@ -53,7 +53,7 @@ class blogs extends Router
                 'usr_like' => $usr_like,
                 'likes_count' => $post_like,
                 'comments' => $comments,
-                'script' => '/static/js/clipboard.js',
+                'script' => '../../public/static/js/clipboard.js',
             ];
             //Serve /main/blogs with blogs.php
             $this->view($data);

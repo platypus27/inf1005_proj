@@ -25,7 +25,7 @@
                             echo $friend;
                             echo "</a>";
                             echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";
-                            echo "<button class='btn btn-primary float-right' id='post-submit'>Accept Friend Request</button>";
+                            echo "<button class='btn btn-primary float-right post-submit'>Accept Friend Request</button>";
                             echo "</form>";
                         }
                     }
@@ -43,7 +43,7 @@
                         echo $friend;
                         echo "</a>";
                         echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";
-                        echo "<button class='btn btn-primary float-right' id='post-submit'>Reject Friend Request</button>";
+                        echo "<button class='btn btn-primary float-right post-submit'>Reject Friend Request</button>";
                         echo "</form>";
                     }
                 }

@@ -8,4 +8,4 @@ if ($_GET['timeout']):?>
 <?php endif;
 endif; ?>
     <h1>placeholder idk</h1>
-</div>
+</section>

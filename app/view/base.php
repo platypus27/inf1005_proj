@@ -5,7 +5,7 @@
     <title>tint</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="SHORTCUT ICON" href= "/public/static/image/icon.ico" type="image/x-icon" />
+    <link rel="SHORTCUT ICON" href= "/public/static/image/icon.ico" type="image/x-icon" >
     <!--jQuery-->
     <script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -42,15 +42,15 @@
         
         <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
             <a class="nav-brand" href="/blogs/all">
-            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home" />
+            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home">
             </a>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="navicon" onclick="animation(this)">   
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
-                </div> 
+                <span class="navicon" onclick="animation(this)">   
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </span> 
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-0">
@@ -60,7 +60,8 @@
                                 <div class="tb">
                                     <div class="td">
                                         <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                        <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required></div>
+                                        <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required>
+                                    </div>
                                         <div class="td" id="s-cover">
                                         <button type="submit">
                                         <div id="s-circle"></div>
@@ -85,14 +86,14 @@
             </div>
         <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
             <a class="nav-brand" href="/blogs/all">
-            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home" />
+            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="navicon" onclick="animation(this)">   
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
-                </div> 
+                <span class="navicon" onclick="animation(this)">   
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </span>  
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-0">
@@ -106,7 +107,7 @@
                                         <div class="td" id="s-cover">
                                         <button type="submit">
                                         <div id="s-circle"></div>
-                                        <span></span>
+                                        <span id="search"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -133,14 +134,14 @@
             </div>
         <?php else : ?>
             <a class="nav-brand" href="/">
-            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home" />
+            <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="navicon" onclick="animation(this)">   
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
-                </div> 
+                <span class="navicon" onclick="animation(this)">   
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </span>  
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-0">

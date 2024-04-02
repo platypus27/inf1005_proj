@@ -115,7 +115,7 @@ h2 {
   color: #f0ffce;
 }
 
-#commentbox {
+.commentbox {
   border: 1px solid #917885;
   margin: 3px
 }
@@ -148,6 +148,7 @@ h2 {
 }
 
 .bar1, .bar2, .bar3 {
+  display: block;
   width: 35px;
   height: 5px;
   background-color: #FFC2C3;
@@ -204,7 +205,7 @@ a img {
   border-radius: 1rem;
 }
 
-#post-submit {
+.post-submit {
   width: auto;
   height: auto;
   padding: 1rem 2rem 1rem 2rem;
@@ -367,7 +368,7 @@ form.contactus button:active{
   align-items: center;
 }
 
-#postheader {
+.postheader {
   padding: 2rem;
 }
 
@@ -600,6 +601,7 @@ button {
 .searchbar {
   background-color: white;
   padding: 1rem;
+  border-radius: 5rem;
 }
 
 .td input[type="text"] {
@@ -641,7 +643,7 @@ button {
   transition: 0.5s ease all;
 }
 
-button span {
+button span#search {
   position: absolute;
   top: 4rem;
   left: 2rem;
@@ -654,8 +656,8 @@ button span {
   transition: 0.5s ease all;
 }
 
-button span:before,
-button span:after {
+button span#search:before,
+button span#search:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -677,24 +679,24 @@ button span:after {
   border-radius: 1rem;
 }
 
-#s-cover:hover span {
+#s-cover:hover span#search {
   left: 4rem;
   width: 1rem;
   margin-top: -1.1rem;
   transform: rotateZ(0);
 }
 
-#s-cover:hover button span:before {
+#s-cover:hover button span#search:before {
   bottom: 11px;
   transform: rotateZ(52deg);
 }
 
-#s-cover:hover button span:after {
+#s-cover:hover button span#search:after {
   bottom: -11px;
   transform: rotateZ(-52deg);
 }
-#s-cover:hover button span:before,
-#s-cover:hover button span:after {
+#s-cover:hover button span#search:before,
+#s-cover:hover button span#search:after {
   right: -6px;
   width: 40px;
   background-color: #917885;
