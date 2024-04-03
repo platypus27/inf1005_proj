@@ -17,10 +17,10 @@
     </form>
     <?php
         if (isset($_GET['error'])){
-            if($_GET['error'] == "invalidcredentials"){
-                echo '<p id="loginerror">Invalid username/password combination.</p>';
-            } else if($_GET['error'] == "accountlocked"){
-                echo '<p id="loginerror">Your account is suspended.</p>';
+            if($_GET['error'] == "invalid"){
+                echo '<p id="loginerror">invalid credentials</p>';
+            } else if($_GET['error'] == "suspended"){
+                echo '<p id="loginerror">account suspended</p>';
             }
         }
     ?>

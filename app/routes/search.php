@@ -22,13 +22,16 @@ class search extends Router{
      * 
      */
     protected function index(){
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $search_control = new SearchController();
-            $search = $search_control->getSearchResults();
-            $this->view(['page' => 'search_results','search' => $search]);
-        } else{
-            $this->view(['page' => 'search_results']);
+        $search = null;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $searchControl = new SearchController();
+            $search = $searchControl->getSearchResults();
         }
-        
+
+        $this->view([
+            'page' => 'search_results',
+            'search' => $search
+        ]);
     }
 }

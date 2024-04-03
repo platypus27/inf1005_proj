@@ -33,23 +33,36 @@ class App{
         $this->StartSession();
         $this->url = $_SERVER['REQUEST_URI'];
         $this->parseUrl();
-        get($this->url[1]);
-        get($this->url[2]);
         $this->SetPageName();
-        if (!is_null(get_user('*', ['isadmin'=>['=', 1]]))) {
-            if ($this->controller === 'setup') {
-                header('Location: /', true, 301);
-                die();
-            }
-        } else if ($this->controller !== 'setup'){
-            header("Location: /setup");
+    
+        $isAdminExists = !is_null(get_user('*', ['isadmin'=>['=', 1]]));
+        if ($isAdminExists && $this->controller === 'setup') {
+            header('location: /', true, 301);
+            die();
+        } elseif (!$isAdminExists && $this->controller !== 'setup') {
+            header("location: /setup");
+            die();
         }
-        require_once '../app/routes/' . $this->controller . '.php';
+    
+        $controllerFile = '../app/routes/' . $this->controller . '.php';
+        if (file_exists($controllerFile)) {
+            require_once $controllerFile;
+        } else {
+            throw new Exception("controller file does not exist: $controllerFile");
+        }
+    
         $this->SetFunctionName();
         $this->SetParam();
+    
+        $controller = new $this->controller();
         $function = $this->function;
         $params = $this->params;
-        (new $this->controller())->$function($params);
+    
+        if (method_exists($controller, $function)) {
+            $controller->$function($params);
+        } else {
+            throw new Exception("method $function does not exist in controller " . get_class($controller));
+        }
     }
 
     /**
@@ -61,16 +74,18 @@ class App{
      */
     public function StartSession(){
         session_start();
-        if(!isset($_SESSION[SESSION_RIGHTS])){
-            $_SESSION[SESSION_RIGHTS] = AUTH_GUEST;
-        }
-        if(!isset($_SESSION[SESSION_CSRF_TOKEN])){
+    
+        $_SESSION[SESSION_RIGHTS] = $_SESSION[SESSION_RIGHTS] ?? AUTH_GUEST;
+        if (!isset($_SESSION[SESSION_CSRF_TOKEN])) {
             (new Router())->token_gen();
         }
-        if(!(new Router())->check_session_timeout() && $_SESSION[SESSION_RIGHTS] > 0){
+    
+        $router = new Router();
+        $isSessionTimeout = !$router->check_session_timeout();
+        if ($isSessionTimeout && $_SESSION[SESSION_RIGHTS] > AUTH_GUEST) {
             session_destroy();
             header('Location: /?timeout=1');
-            die();
+            exit();
         }
     }
 
@@ -116,15 +131,17 @@ class App{
      * 
      */
     public function SetFunctionName(){
-        if(isset($this->url[2])){
-            if(method_exists($this->controller, $this->url[2])){
-                $this->function = $this->url[2];
-                unset($this->url[2]);
-            }else{
-                (new Router)->abort(404);
-                die();
-            }
+        if (!isset($this->url[2])) {
+            return;
         }
+    
+        if (!method_exists($this->controller, $this->url[2])) {
+            (new Router)->abort(404);
+            exit();
+        }
+    
+        $this->function = $this->url[2];
+        unset($this->url[2]);
     }
 
     /**

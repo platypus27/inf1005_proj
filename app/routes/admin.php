@@ -46,25 +46,43 @@ class admin extends Router{
      * Endpoint only allows POST
      */
     protected function action($args) {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->abort(405);
+            return;
         }
-        
-        $user = get_user('*', ['id'=>['=', $_POST['uid']]])[0];
-        if ($_POST['button'] === 'promote') {
-            $user->getField('isadmin')->setValue(1);
-        } else if ($_POST['button'] === 'demote') {
-            $user->getField('isadmin')->setValue(0);
-        } else if ($_POST['button'] === 'suspend') {
-            $user->getField('suspended')->setValue(1);
-        } else if ($_POST['button'] === 'unsuspend') {
-            $user->getField('suspended')->setValue(0);
-        } else {
+
+        $uid = $_POST['uid'] ?? null;
+        $button = $_POST['button'] ?? null;
+
+        if (is_null($uid) || is_null($button)) {
             $this->abort(400);
+            return;
         }
-        
+
+        $user = get_user('*', ['id' => ['=', $uid]])[0] ?? null;
+
+        if (is_null($user)) {
+            $this->abort(404);
+            return;
+        }
+
+        $actions = [
+            'promote' => ['isadmin', 1],
+            'demote' => ['isadmin', 0],
+            'suspend' => ['suspended', 1],
+            'unsuspend' => ['suspended', 0]
+        ];
+
+        if (!array_key_exists($button, $actions)) {
+            $this->abort(400);
+            return;
+        }
+
+        [$field, $value] = $actions[$button];
+        $user->getField($field)->setValue($value);
+
         $result = $user->update();
-        http_response_code($result === true ? 204: 500);
+        http_response_code($result === true ? 204 : 500);
     }
 
     /**
@@ -72,20 +90,32 @@ class admin extends Router{
      * Endpoint only allows GET
      */
     protected function contact($args) {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if (count($args)) {
-                $contact = get_contactus('*', ['id'=>['=', $args[0]]]);
-                if ($contact === NULL){
-                    $this->abort(404);
-                }
-                self::view(['page'=>'admin/contact/specific', 'contact'=>$contact, 'script'=>'../public/static/js/admin/action.js']);
-            } else {
-                $contact = get_contactus('*');
-                self::view(['page'=>'admin/contact/all', 'contact'=>$contact]);
-            }
-        } else {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             $this->abort(405);
+            return;
         }
+    
+        if (count($args)) {
+            $contact = get_contactus('*', ['id' => ['=', $args[0]]]);
+    
+            if ($contact === null) {
+                $this->abort(404);
+                return;
+            }
+    
+            $page = 'admin/contact/specific';
+            $script = '../public/static/js/admin/action.js';
+        } else {
+            $contact = get_contactus('*');
+            $page = 'admin/contact/all';
+            $script = null;
+        }
+    
+        self::view([
+            'page' => $page,
+            'contact' => $contact,
+            'script' => $script
+        ]);
     }
 
     /**

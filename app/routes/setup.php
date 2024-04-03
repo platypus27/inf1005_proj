@@ -21,16 +21,21 @@ class Setup extends Router{
      * 
      */
     protected function index($args){
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            self::view(["page"=>"admin/setup"]);
-        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $register_control = new RegisterController();
-            $register_admin = $register_control->createUserAccount();
-            if ($register_admin === NULL){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $registerControl = new RegisterController();
+            $registerAdmin = $registerControl->createUserAccount();
+    
+            if ($registerAdmin === null) {
                 $this->abort(500);
-            } else{
-                header("Location: /");
+                return;
             }
+    
+            header("Location: /");
+            exit();
+        }
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            self::view(["page" => "admin/setup"]);
         }
     }
 }

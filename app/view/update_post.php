@@ -9,7 +9,7 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control post-box" name="content" rows="18"
+                        <textarea class="form-control post-box" name="content" rows="15"
                                 placeholder="Edit your Post here..."
                                 required><?= ($data['tint_post'])->getField('content')->getValue(); ?></textarea>
                     </div>

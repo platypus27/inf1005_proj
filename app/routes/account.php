@@ -31,14 +31,21 @@ class account extends Router
      * @param   array   $url    URL parameters
      * 
      */
-    protected function profile()
-    {
-        $account_control = new AccountController();
-        $user = $account_control->getdetails();
-        if ($user == NULL) {
+    protected function profile() {
+        $accountControl = new AccountController();
+        $user = $accountControl->getdetails();
+
+        if ($user === null) {
             $this->abort(400);
+            return;
         }
-        $this->view(['page' => 'profile', 'loginid' => $user->getField('loginid')->getValue(), 'name' => $user->getField('name')->getValue(), 'email' => $user->getField('email')->getValue()]);
+
+        $this->view([
+            'page' => 'profile',
+            'loginid' => $user->getField('loginid')->getValue(),
+            'name' => $user->getField('name')->getValue(),
+            'email' => $user->getField('email')->getValue()
+        ]);
     }
 
     /**
@@ -47,16 +54,18 @@ class account extends Router
      * @param   array   $url    URL parameters
      * 
      */
-    protected function update_profile()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $account_control = new AccountController();
-            if ($account_control->update_user() === false) {
-                $_SESSION['msg'] = 'An unexpected error occurred';
-            }
-            header("Location: /account/profile");
-        } else {
+    protected function update_profile() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->abort(405);
+            return;
         }
+
+        $account_control = new AccountController();
+        if ($account_control->update_user() === false) {
+            $_SESSION['msg'] = 'An unexpected error occurred';
+        }
+
+        header("Location: /account/profile");
+        exit();
     }
 }

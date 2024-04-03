@@ -32,15 +32,20 @@ class register extends Router{
      * 
      */
     protected function register_process(){
-        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->abort(403);
+            return;
         }
-        $register_control = new RegisterController();
-        $register = $register_control->createUserAccount();
-        if ($register == NULL){
+    
+        $registerControl = new RegisterController();
+        $register = $registerControl->createUserAccount();
+    
+        if ($register === null) {
             header("Location: /register?error=sqlerror");
-        } else{
+        } else {
             header("Location: /login");
         }
+    
+        exit();
     }
 }

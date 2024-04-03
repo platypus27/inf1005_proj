@@ -60,8 +60,6 @@
                             <button class="btn btn-primary float-right" type="submit" name="update" value="bpassword">change password</button>
                         </div>
 
-                        
-                        <label id="profilenote">note: if you change your password, your password will be updated on your next sign in</label>
                         <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>"></div>
                     </div>
                 </div>

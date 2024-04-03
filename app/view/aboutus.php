@@ -1,5 +1,4 @@
 <div class="card" id="aboutus">
-    
     <p class="card-body" id="aboutbody">
         <h1>Welcome</h1>
         <div class='bg-light p-5'>

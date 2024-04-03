@@ -20,7 +20,7 @@ if(isset($data['search'])){
             
       <?php }
     }  else{
-      ?> <div class="card p-5"> <?php echo "<h3>Oops! The user you are trying to find does not exist!</h3>";?></div>
+      ?> <div class="card p-5"> <?php echo "<h3>user does not exist</h3>";?></div>
   <?php }
 }
 ?>

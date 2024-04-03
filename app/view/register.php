@@ -17,7 +17,7 @@
         <div class="form-group col-sm-auto">
             <label for="loginid">profile name</label>
             <div>
-                <input type="text" title="This will be your profile name." class="form-control" required name="loginid" id="loginid">
+                <input type="text" title="this will be your profile name." class="form-control" required name="loginid" id="loginid">
             </div>
         </div>
         <div class="form-group col-sm-auto">
@@ -29,26 +29,22 @@
         </div>
         <div class="form-group col-sm-auto">
             <label>email</label>
-            <div>
-                <input type="email" class="form-control" required pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" id="email" name="email">
-            </div>
+            <div><input type="email" class="form-control" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" id="email" name="email"></div>
         </div>
 
         <div class="form-group col-sm-auto">
             <label>password</label>
-            <div><input type="password" title="Password must contain at least 8 characters, including UPPER/lowercase and numbers." class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" id="password" name="password"></div>
-            <span id='message'></span>
+            <div><input type="password" title="password must contain at least 8 characters, including uppercase letters and numbers." class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" id="password" name="password"></div>
         </div>
         <div class="form-group col-sm-auto">
             <label>confirm password</label>
             <div>
-                <input type="password" title="Please enter the same password as the one above." class="form-control" minlength="8" required id="confirm_password" name="confirm_password">
-                <span id='message1'></span>
+                <input type="password" title="password different from above" class="form-control" required id="confirm_password" name="confirm_password">
             </div>
         </div>
         <div class="form-group col-sm-auto">
             <div class="terms">
-                <input type="checkbox" required name="terms"> i accept terms and conditions
+                <input type="checkbox" required name="terms"> i accept the terms and conditions
             </div>
             <div>
                 <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN]; ?>">
@@ -56,9 +52,7 @@
             </div>
             <?php
             if (isset($_GET['error'])) {
-                if ($_GET['error'] == "sqlerror") {
-                    echo '<p id="sqlerror">Please enter the fields again.</p>';
-                }
+                echo '<p id="sqlerror">error</p>';
             }
             ?>
         </div>
