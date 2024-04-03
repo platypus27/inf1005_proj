@@ -54,20 +54,16 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-0">
-                    <li class="nav-item">
+                    <li class="nav-item searchitem">
                         <div id="cover">
                             <form class="searchbar" method="post" action="/search" method="get" action="">
-                                <div class="tb">
-                                    <div class="td">
-                                        <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                        <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required>
-                                    </div>
-                                        <div class="td" id="s-cover">
-                                        <button type="submit">
-                                        <div id="s-circle"></div>
-                                        <span></span>
-                                        </button>
-                                    </div>
+                                <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required>
+                                <div id="s-cover">
+                                    <button type="submit">
+                                    <div id="s-circle"></div>
+                                    <span id="search"></span>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -97,19 +93,16 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-0">
-                    <li class="nav-item">
+                    <li class="nav-item searchitem">
                         <div id="cover">
                             <form class="searchbar" method="post" action="/search" method="get" action="">
-                                <div class="tb">
-                                    <div class="td">
-                                        <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                        <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required></div>
-                                        <div class="td" id="s-cover">
-                                        <button type="submit">
-                                        <div id="s-circle"></div>
-                                        <span id="search"></span>
-                                        </button>
-                                    </div>
+                                <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required>
+                                <div id="s-cover">
+                                    <button type="submit">
+                                    <div id="s-circle"></div>
+                                    <span id="search"></span>
+                                    </button>
                                 </div>
                             </form>
                         </div>

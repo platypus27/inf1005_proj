@@ -1,7 +1,7 @@
 <section>
 <?php if (isset($_SESSION['post_success'])): ?>
-    <article class="alert alert-success alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
-        <h5 class="text-center">Your Post has been added!!</h5>
+    <article class="alert alert-light alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
+        <h5 class="text-center">your post has been added!!</h5>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -9,8 +9,8 @@
     <?php unset($_SESSION['post_success']);
 endif; ?>
 <?php if (isset($_SESSION['update_success'])): ?>
-    <article class="alert alert-success alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
-        <h5 class="text-center">Your Post has been updated!!</h5>
+    <article class="alert alert-light alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
+        <h5 class="text-center">your post has been updated</h5>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -18,8 +18,8 @@ endif; ?>
     <?php unset($_SESSION['update_success']);
 endif; ?>
 <?php if (isset($_SESSION['postdeleted'])):?>
-    <article class="alert alert-success alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
-        <h5 class="text-center">Your Post has been successfully deleted!!</h5>
+    <article class="alert alert-light alert-dismissible fade show mt-2 mb-0 alert-box post-alert" role="alert">
+        <h5 class="text-center">your post has been successfully deleted</h5>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

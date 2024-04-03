@@ -31,10 +31,19 @@ main{
   border-radius: unset;
 }
 
+h1 {
+  color: #FFC2C3;
+  font-weight: bold;
+}
+
 h2 {
   color: #FFC2C3;
   background-color: #90AFC5 !important;
   font-weight: bold;
+}
+
+h3.aboutus{
+  color: black;
 }
 
 #footer-logo {
@@ -72,12 +81,6 @@ h2 {
   border: none;
 }
 
-.btn-danger:visited {
-  background-color: #917885 !important;
-  color: #f0ffce;
-  border: none;
-}
-
 .btn-primary {
   background-color: #917885;
   color: #f0ffce;
@@ -101,12 +104,6 @@ h2 {
 }
 
 .btn-primary:active {
-  background-color: white !important;
-  border: 3px solid #917885 !important;
-  color: #917885;
-}
-
-.btn-primary:visited {
   background-color: white !important;
   border: 3px solid #917885 !important;
   color: #917885;
@@ -480,6 +477,10 @@ form.register button:hover{
   color: #917885;
 }
 
+.alert-light button {
+  height: 1rem;
+  width: 1rem;
+}
 
 /*About us page*/
 #aboutheader{
@@ -518,7 +519,6 @@ margin:auto;
   overflow-wrap: break-word;
 }
 .post-alert, .comment-alert{
-  position:fixed;
   z-index:10000;
 }
 
@@ -620,31 +620,34 @@ button {
 #cover {
   border-radius: 1rem;
   transform: scale(0.6);
-  position: absolute;
-  right: 35%;
+  width: 100%;
 }
 
 .searchbar {
   background-color: white;
   padding: 1rem;
   border-radius: 5rem;
+  display: flex;
 }
 
-.td input[type="text"] {
-  width: 100%;
+.searchitem {
+  width: 40rem;
+}
+
+.searchbar input[type="text"] {
+  width: 85%;
   height: 6rem;
   font-size: 3rem;
   line-height: 1;
   font-weight: bold;
 }
 
-.td input[type="text"]::placeholder {
+.searchbar input[type="text"]::placeholder {
   color: #917885;
 }
 
 #s-cover {
   width: 1px;
-  padding-left: 35px;
 }
 
 button {
@@ -764,12 +767,25 @@ button span#search:after {
 }
 
 @media screen and (max-width: 425px) {
-  .searchbar {
-    width: 15rem;
-  }
+  
   .nav-link {
     font-size: large;
     padding: 0 1rem !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .navbar-collapse {
+    background-color: white;
+  }
+
+  #searchbar {
+    margin: 0.5rem;
+    border: 3px solid #917885;
+  }
+
+  .nav-link {
+    color: #917885 !important;
   }
 }
 
@@ -777,5 +793,39 @@ button span#search:after {
   .mainpage {
     position: absolute;
     bottom: 0;
+  }
+
+  #cover {
+    display: contents;
+  }
+  .searchbar {
+    padding: 0px
+  }
+
+  #searchbar {
+    height: 3rem;
+    font-size: large;
+    padding-left: 1rem;
+  }
+
+  #s-cover {
+    display: none;
+  }
+
+  .searchitem {
+    width: 100%;
+  }
+
+  .nav-item {
+    max-height: 3rem;
+  }
+
+  a.nav-link {
+    margin: 0 !important;
+    padding: 0 1rem !important;
+  }
+
+  .tb {
+    display: flex;
   }
 }

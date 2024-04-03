@@ -1,17 +1,4 @@
 <section class="m-5">
-<?php if ($_GET) :
-    if (isset($_GET['update'])) :
-        if ($_GET['update'] == 'failed'):?>
-            <article class="alert alert-danger alert-dismissible fade show alert-box mt-2 mb-0 post-alert" role="alert">
-                <p class="text-center">Your Post is empty</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </article>
-        <?php
-        endif;
-    endif;
-endif; ?>
     <h2>Edit Post</h2>
         <form action="/blog/updatepost/<?= ($data['blog_post'])->getField('id')->getValue(); ?>" method="post">
             <fieldset class="row">
