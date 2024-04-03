@@ -1,5 +1,5 @@
 <?php
-require_once('../app/controllers/BlogController.php');
+require_once('../app/controllers/TintController.php');
 require_once('../app/model/Post_Like.php');
 
 /**
@@ -16,7 +16,7 @@ class LikesController{
     */
     public function setLikes($postid){
         $loginid = $_SESSION[SESSION_LOGIN];
-        $usr_id = (new BlogController())->getUserID($loginid);
+        $usr_id = (new TintController())->getUserID($loginid);
         //Check if post is already liked by user
         $LikeFound = $this->getLikes(3,$usr_id,$postid);
         if(is_null($LikeFound)) {
@@ -44,7 +44,7 @@ class LikesController{
     */
     public function RemoveLikes($postid){
         $loginid = $_SESSION[SESSION_LOGIN];
-        $usr_id = (new BlogController())->getUserID($loginid);
+        $usr_id = (new TintController())->getUserID($loginid);
         //Check if user like the post
         $like_post = ($this->getLikes(3, $usr_id,$postid));
         if(is_array($like_post)){

@@ -1,6 +1,6 @@
 <?php
 
-require_once('../app/controllers/BlogController.php');
+require_once('../app/controllers/TintController.php');
 require_once('../app/controllers/FriendsController.php');
 
 /**

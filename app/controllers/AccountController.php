@@ -1,18 +1,18 @@
 <?php
-/**
- * Controller for User Accounts
- * This file states all the functions that are required to manage user accounts
- * 
- * @package    Blog
- * @subpackage Blog/controllers
- * @category   Controllers
- * @version    1.0
- * 
- */
 
 require_once("../app/model/User.php");
 require_once("../app/constants.php");
 
+/**
+ * Controller for User Accounts
+ * This file states all the functions that are required to manage user accounts
+ * 
+ * @package    Tint
+ * @subpackage Tint/controllers
+ * @category   Controllers
+ * @version    1.0
+ * 
+ */
 class AccountController
 {
     /**

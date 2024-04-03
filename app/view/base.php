@@ -41,7 +41,7 @@
     <nav class="navbar navbar-expand-lg">
         
         <?php if ($_SESSION[SESSION_RIGHTS] == AUTH_ADMIN) : ?>
-            <a class="nav-brand" href="/blogs/all">
+            <a class="nav-brand" href="/tints/all">
             <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home">
             </a>
             
@@ -56,12 +56,12 @@
                 <ul class="navbar-nav mr-0">
                     <li class="nav-item searchitem">
                         <div id="cover">
-                            <form class="searchbar" method="post" action="/search" method="get" action="">
+                            <form class="searchbar" method="post" action="/search">
                                 <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
                                 <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required>
-                                <div id="s-cover">
+                                <div id="s-cover" aria-label="search">
                                     <button type="submit">
-                                    <div id="s-circle"></div>
+                                        <div id="s-circle"></div>
                                     <span id="search"></span>
                                     </button>
                                 </div>
@@ -81,7 +81,7 @@
                 
             </div>
         <?php elseif ($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN) : ?>
-            <a class="nav-brand" href="/blogs/all">
+            <a class="nav-brand" href="/tints/all">
             <img class="rounded-circle" src="/public/static/image/logo.jpg" id="logo" alt="Home">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,11 +95,11 @@
                 <ul class="navbar-nav mr-0">
                     <li class="nav-item searchitem">
                         <div id="cover">
-                            <form class="searchbar" method="post" action="/search" method="get" action="">
+                            <form class="searchbar" method="post" action="/search">
                                 <input type="hidden" name="<?= FORM_CSRF_FIELD ?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="Search" required>
+                                <input id="searchbar" type="text" placeholder="search..." name="search" aria-label="search" required>
                                 <div id="s-cover">
-                                    <button type="submit">
+                                    <button type="submit" aria-label="search">
                                     <div id="s-circle"></div>
                                     <span id="search"></span>
                                     </button>
@@ -108,13 +108,13 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/blog/u/<?= $_SESSION[SESSION_LOGIN] ?>"><?= $_SESSION[SESSION_LOGIN] ?></a>
+                        <a class="nav-link" href="/tint/u/<?= $_SESSION[SESSION_LOGIN] ?>"><?= $_SESSION[SESSION_LOGIN] ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/friends/u">friends</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/blog/create">create</a>
+                        <a class="nav-link" href="/tint/create">create</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/account/profile">profile</a>
@@ -165,13 +165,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <?php if($data['page'] == 'main'): ?>
+    <footer>
+        <div class="footercont">
+            <img src="/public/static/image/logo.jpg" id="footer-logo" alt="footerimg">
+            <h4 class="p-2">tint inc. 2024 all rights reserved</h4>
+        </div>
+    </footer>
 </body>
-<?php if($data['page'] == 'main'): ?>
-<footer>
-    <div class="footercont">
-        <img src="/public/static/image/logo.jpg" id="footer-logo" alt="footerimg">
-        <h4 class="p-2">tint inc. 2024 all rights reserved</h4>
-    </div>
-</footer>
 <?php endif; ?>
 </html>

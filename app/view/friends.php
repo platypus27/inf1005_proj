@@ -6,7 +6,7 @@
                 <?php 
                     if (isset($data['friends_list'])) {
                         foreach ($data['friends_list'] as $friend) {
-                            echo "<a class='friendbox' href=/blog/u/".$friend.">";
+                            echo "<a class='friendbox' href=/tint/u/".$friend.">";
                             echo $friend ;
                             echo "</a>";
                         }
@@ -21,7 +21,7 @@
                     if (isset($data['friend_requests'])) {
                         foreach ($data['friend_requests'] as $friend) {
                             echo "<form class='friendbox' action='/friends/addfriend/".$friend."' method='post'>";
-                            echo "<a class='friendbox' href='/blog/u/".$friend."'>";
+                            echo "<a class='friendbox' href='/tint/u/".$friend."'>";
                             echo $friend;
                             echo "</a>";
                             echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";
@@ -39,7 +39,7 @@
                 if (isset($data['sent_requests'])) {
                     foreach ($data['sent_requests'] as $friend) {
                         echo "<form class='friendbox' action='/friends/rejectfriend/".$friend."' method='post'>";
-                        echo "<a class='friendbox' href=/blog/u/".$friend.">";
+                        echo "<a class='friendbox' href=/tint/u/".$friend.">";
                         echo $friend;
                         echo "</a>";
                         echo "<input type='hidden' name='".FORM_CSRF_FIELD."' value='".$_SESSION[SESSION_CSRF_TOKEN]."'>";

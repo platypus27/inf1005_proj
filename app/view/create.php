@@ -1,6 +1,6 @@
 <section class="ml-5 mr-5 mt-3">
     <h2 style="font-weight:bold;">create post</h2>
-        <form action="/blog/create" method="post">
+        <form action="/tint/create" method="post">
             <fieldset class="row">
                 <div class="col">
                     <div class="form-group" id="post-title" >

@@ -53,7 +53,7 @@ class login extends Router
             $_SESSION[SESSION_LOGIN] = $account['loginid'];
             $_SESSION[SESSION_CSRF_EXPIRE] = time() + 3600;
             $_SESSION[SESSION_RIGHTS] = AUTH_LOGIN;
-            header("Location: /blogs/all");
+            header("Location: /tints/all");
         }
     }
 }

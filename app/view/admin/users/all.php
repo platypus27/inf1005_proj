@@ -12,7 +12,7 @@
                     <a href="/admin/u/<?= $id ?>"><?= $id ?></a>
                 </p>
                 <p class="commentloginid">
-                    <a href="/blog/u/<?= htmlspecialchars($user->getField('loginid')->getValue()); ?>"><?= htmlspecialchars($user->getField('loginid')->getValue()); ?></a>
+                    <a href="/tint/u/<?= htmlspecialchars($user->getField('loginid')->getValue()); ?>"><?= htmlspecialchars($user->getField('loginid')->getValue()); ?></a>
                 </p>
                 <p class="commentloginid">email: <?= htmlspecialchars($user->getField('email')->getValue()); ?></p>
                 <p class="commentloginid">name: <?= htmlspecialchars($user->getField('name')->getValue()); ?></p>

@@ -1,6 +1,6 @@
 <?php
 require_once("../app/controllers/ContactUsController.php");
-require_once("../app/routes/blogs.php");
+require_once("../app/routes/tints.php");
 
 /**
  * main
@@ -25,8 +25,8 @@ class main extends Router{
         $this->view(['page'=>'contactus']);
     }
 
-    protected function blogs(){
-        $this->view(['page'=>'blogs']);
+    protected function tints(){
+        $this->view(['page'=>'tints']);
     }
 
     protected function contact_us(){

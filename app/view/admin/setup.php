@@ -1,7 +1,7 @@
 <section class="col-sm-9 border-0 m-auto">
     <div class="m-3">
         <h1>Admin account creation</h1>
-        <p>Please create an admin account for blog administration</p>
+        <p>Please create an admin account for tint administration</p>
         <form name="frmRegistration" method="POST" action="/setup">
             <div class="form-group">
                 <?php

@@ -14,7 +14,7 @@ if(isset($data['search'])){
             $name = $results->getField('name')->getValue();
             ?>
               <div class = 'row p-3'>
-                <div class="col"><?php echo "<a href=/blog/u/".$loginid.">".$loginid."</a>";?></div>
+                <div class="col"><?php echo "<a href=/tint/u/".$loginid.">".$loginid."</a>";?></div>
                 <div class="col"><?php echo "<p>".$name."<p>";?></div>
               </div>  
             

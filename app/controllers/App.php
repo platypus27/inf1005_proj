@@ -1,18 +1,17 @@
 <?php
+require_once "../app/model/User.php";
+require_once "../app/controllers/Router.php";
+
 /**
  * App class
  * This class is the main controller of the application
  * 
- * @package    Blog
- * @subpackage Blog/controllers
+ * @package    Tint
+ * @subpackage Tint/controllers
  * @category   Controllers
  * @version    1.0
  * 
  */
-
-require_once "../app/model/User.php";
-require_once "../app/controllers/Router.php";
-
 class App{
     protected $controller = 'main';
 
