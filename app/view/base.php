@@ -170,7 +170,7 @@
 <footer>
     <div class="footercont">
         <img src="/public/static/image/logo.jpg" id="footer-logo" alt="footerimg">
-        <h4 class="p-2">tint inc.</h4>
+        <h4 class="p-2">tint inc. 2024 all rights reserved</h4>
     </div>
 </footer>
 <?php endif; ?>
