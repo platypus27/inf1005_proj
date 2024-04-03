@@ -17,7 +17,7 @@ class admin extends Router{
     }
 
     /**
-     * Endpoint to retrieve all or specific user details
+     * Endpoint to retrieve all or specific user information.
      * Endpoint only allows GET
      */
     protected function u($args) {

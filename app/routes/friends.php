@@ -3,8 +3,25 @@
 require_once('../app/controllers/BlogController.php');
 require_once('../app/controllers/FriendsController.php');
 
+/**
+ * friends
+ * 
+ * This class is responsible for handling friends requests
+ * 
+ * @category Router
+ * @package  friends
+ * 
+ */
 class friends extends Router 
 {
+    /**
+     * All
+     * 
+     * This function is responsible for handling all friends requests
+     * 
+     * @return void
+     * 
+     */
     protected function u()
     {
         $friends_control = new FriendsController();
@@ -50,6 +67,16 @@ class friends extends Router
         $this->view($data);
     }
 
+    /**
+     * Add friend
+     * 
+     * This function is responsible for adding a friend
+     * 
+     * @param   array   $argv    URL parameters
+     * 
+     * @return void
+     * 
+     */
     protected function addfriend($argv)
     {
         $friends_control = new FriendsController();
@@ -82,6 +109,16 @@ class friends extends Router
         }
     }
 
+    /**
+     * Reject friend
+     * 
+     * This function is responsible for rejecting a friend request
+     * 
+     * @param   array   $argv    URL parameters
+     * 
+     * @return void
+     * 
+     */
     protected function rejectfriend($argv)
     {
         $friends_control = new FriendsController();
@@ -113,6 +150,16 @@ class friends extends Router
         }
     }
 
+    /**
+     * Send friend request
+     * 
+     * This function is responsible for sending a friend request
+     * 
+     * @param   array   $argv    URL parameters
+     * 
+     * @return void
+     * 
+     */
     protected function sendReq($argv){
         $friends_control = new FriendsController();
         $userID = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
@@ -143,6 +190,16 @@ class friends extends Router
         }
     }
 
+    /**
+     * Delete friend
+     * 
+     * This function is responsible for deleting a friend
+     * 
+     * @param   array   $argv    URL parameters
+     * 
+     * @return void
+     * 
+     */
     protected function delFriend($argv){
         $friends_control = new FriendsController();
         $userID = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);

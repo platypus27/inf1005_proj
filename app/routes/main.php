@@ -2,6 +2,15 @@
 require_once("../app/controllers/ContactUsController.php");
 require_once("../app/routes/blogs.php");
 
+/**
+ * main
+ * 
+ * This class is responsible for handling main requests
+ * 
+ * @category Router
+ * @package  main
+ * 
+ */
 class main extends Router{
     protected $RIGHTS = AUTH_GUEST;
     protected function index(){

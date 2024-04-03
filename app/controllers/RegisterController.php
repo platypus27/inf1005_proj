@@ -2,8 +2,24 @@
 require_once("../app/model/User.php");
 require_once("../app/controllers/BlogController.php");
 
+
+/**
+ * RegisterController
+ * 
+ * This class is responsible for handling registration requests
+ * 
+ * @category Controller
+ * @package  RegisterController
+ * 
+ */
 class RegisterController
 {
+    /**
+     * Create user account
+     * 
+     * @return bool
+     * 
+     */
     public function createUserAccount()
     {
         $confirm_pass = $_POST["confirm_password"];

@@ -3,6 +3,15 @@ require_once("../app/model/utils/Field.php");
 require_once("../app/model/utils/Model.php");
 require_once("../app/utils/helpers.php");
 
+/**
+ * User
+ * 
+ * This class is responsible for handling user operations
+ * 
+ * @category Model
+ * @package  User
+ * 
+ */
 class User extends Model{
     const tablename = "users";
     const fields = ["id", "loginid", "password", "email", "name", "isadmin", "suspended"];
@@ -14,6 +23,12 @@ class User extends Model{
     protected $isadmin = null;
     protected $suspended = null;
 
+    /**
+     * Constructor
+     * 
+     * @param   array   $values     Values to be assigned to fields
+     * 
+     */
     function __construct($values)
     {
         // Initialise fields
@@ -37,6 +52,14 @@ class User extends Model{
 
 }
 
+/**
+ * Get user
+ * 
+ * @param   string  $fields     Fields to be selected
+ * @param   array   $filter_by  Filter to be applied
+ * @return  array|null
+ * 
+ */
 function get_user($fields='*', $filter_by=[]){
     return get_row('User', $fields, $filter_by);
 }

@@ -4,7 +4,15 @@ require_once('../app/controllers/BlogController.php');
 require_once('../app/controllers/LikesController.php');
 require_once('../app/controllers/FriendsController.php');
 
-
+/**
+ * Blog
+ * 
+ * This class is responsible for handling blog requests
+ * 
+ * @category Controller
+ * @package  Blog
+ * 
+ */
 class blog extends Router
 {
     protected $RIGHTS = AUTH_GUEST;
@@ -24,27 +32,14 @@ class blog extends Router
     }
 
     /**
-     * /blog/u
-     *
-     * No access to all users
-     *
      * /blog/u/<loginid>
-     *
-     * <loginid>'s blog page
-     *
-     * /blog/u/<loginid>/<postid>
-     *
-     * Single Post by <loginid>
-     *
-     * @param array argv argv[0]: set as loginid
-     *                   argv[1]: set as postid
-     *
-     * array of argv containing more than 2 values
-     * will return Error 404
-     *
-     * Invalid loginid returns Error 404
+     * 
+     * Get the blog of <loginid>
+     * 
+     * @param array argv Contains the loginid
+     * 
+     * Returns an error page if an invalid loginid is being accessed
      */
-
     protected function u($argv)
     {
         $blog_control = new BlogController();
@@ -163,6 +158,7 @@ class blog extends Router
             }
         }
     }
+
     /**
      * /blog/create
      * Creates a post for <loginid>
@@ -196,6 +192,7 @@ class blog extends Router
             $this->view(['page' => 'create']);
         }
     }
+
     /**
      * /blog/updatepost/<postid>
      * 
@@ -257,6 +254,11 @@ class blog extends Router
         }
     }
 
+    /**
+     * /blog/deletepost
+     * 
+     * Delete a post
+     */
     protected function deletepost()
     {
         if(!($_SESSION[SESSION_RIGHTS] >= AUTH_LOGIN)){
@@ -286,6 +288,7 @@ class blog extends Router
             $this->abort(404);
         }
     }
+
     /**
      * /blog/like
      * 
@@ -330,6 +333,15 @@ class blog extends Router
         }
     }
 
+    /**
+     * /blog/sendreq/<loginid>
+     * 
+     * Send a friend request to <loginid>
+     * 
+     * @param array argv Contains the loginid
+     * 
+     * Returns an error page if an invalid loginid is being accessed
+     */
     protected function sendReq($argv)
     {
         if(!($_SESSION[SESSION_RIGHTS] == AUTH_LOGIN)){
@@ -353,6 +365,15 @@ class blog extends Router
         }
     }
 
+    /**
+     * /blog/deletereq/<loginid>
+     * 
+     * Delete a friend request to <loginid>
+     * 
+     * @param array argv Contains the loginid
+     * 
+     * Returns an error page if an invalid loginid is being accessed
+     */
     protected function deleteReq($argv)
     {
         $friends_control = new FriendsController();
@@ -384,6 +405,15 @@ class blog extends Router
         }
     }
 
+    /**
+     * /blog/acceptreq/<loginid>
+     * 
+     * Accept a friend request from <loginid>
+     * 
+     * @param array argv Contains the loginid
+     * 
+     * Returns an error page if an invalid loginid is being accessed
+     */
     protected function acceptReq($argv){
         $friends_control = new FriendsController();
         $friendA = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
@@ -415,6 +445,15 @@ class blog extends Router
         }
     }
 
+    /**
+     * /blog/delfriend/<loginid>
+     * 
+     * Delete a friend from <loginid>
+     * 
+     * @param array argv Contains the loginid
+     * 
+     * Returns an error page if an invalid loginid is being accessed
+     */
     protected function delFriend($argv) {
         $friends_control = new FriendsController();
         $friendA = $friends_control->getUserID($_SESSION[SESSION_LOGIN]);
@@ -445,6 +484,15 @@ class blog extends Router
         }
     }
 
+    /**
+     * /blog/addcomment/<postid>
+     * 
+     * Add a comment to <postid>
+     * 
+     * @param array argv Contains the postid
+     * 
+     * Returns an error page if an invalid postid is being accessed
+     */
     protected function addComment($argv) {
         require_once('../app/controllers/BlogController.php');
         $blog_control = new BlogController();

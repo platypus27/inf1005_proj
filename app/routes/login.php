@@ -2,14 +2,38 @@
 require_once '../app/controllers/LoginController.php';
 require_once '../app/utils/helpers.php';
 
+/**
+ * Login
+ * 
+ * This class is responsible for handling login requests
+ * 
+ * @category Router
+ * @package  Login
+ * 
+ */
 class login extends Router
 {
-    protected function index()
-    {
+    /**
+     * Index
+     * 
+     * This function is responsible for handling login requests
+     * 
+     * @return void
+     * 
+     */
+    protected function index() {
         $this->view(['page' => 'login']);
     }
-    protected function login_process()
-    {
+
+    /**
+     * Process login
+     * 
+     * This function is responsible for processing login requests
+     * 
+     * @return void
+     * 
+     */
+    protected function login_process() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->abort(403);
         }

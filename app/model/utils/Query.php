@@ -2,8 +2,23 @@
 
 require_once("../app/private/database.php");
 
+/**
+ * Query
+ * 
+ * This class is responsible for handling query operations
+ * 
+ * @category Model
+ * @package  Query
+ * 
+ */
 class Query {
 
+    /**
+     * Build connection
+     * 
+     * @return PDO
+     * 
+     */
     public function build_connection(): PDO{
         $conn = new PDO(DATABASE_URI, DATABASE_USER, DATABASE_PASS);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -48,6 +63,15 @@ class Query {
         return rtrim(rtrim($where, "and"), " ");
     }
 
+    /**
+     * Build select query
+     * 
+     * @param   string  $table  Table to select from
+     * @param   string|array  $fields Fields to select
+     * @param   array   $filter Filter used in where clause
+     * @return  string
+     * 
+     */
     public function build_select($table, $fields, $filter): string
     {
         // Build vanilla select query
@@ -69,6 +93,14 @@ class Query {
         return rtrim($sql, " ");
     }
 
+    /**
+     * Build insert query
+     * 
+     * @param   string  $table  Table to insert into
+     * @param   array   $fields Fields to insert
+     * @return  string
+     * 
+     */
     public function build_insert($table, $fields): string {
         $sql = "INSERT INTO " . $this->construct($table) . " (`";
         if (is_array($fields)){
@@ -89,6 +121,15 @@ class Query {
         return $sql;
     }
 
+    /**
+     * Build update query
+     * 
+     * @param   string  $table  Table to update
+     * @param   array   $values Values to update
+     * @param   array   $filter Filter used in where clause
+     * @return  string
+     * 
+     */
     public function build_update($table, $values, $filter): string {
         $sql = "UPDATE " . $this->construct($table) . " SET ";
 
@@ -104,6 +145,14 @@ class Query {
         return $sql;
     }
 
+    /**
+     * Build delete query
+     * 
+     * @param   string  $table  Table to delete from
+     * @param   array   $filter Filter used in where clause
+     * @return  string
+     * 
+     */
     public function build_delete($table, $filter): string {
         return "DELETE FROM " . $this->construct($table) . " " . $this->build_filter($filter);
     }

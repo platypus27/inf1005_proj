@@ -1,14 +1,38 @@
 <?php
 require_once '../app/constants.php';
+
+/**
+ * Router
+ * 
+ * This class is responsible for handling routing requests
+ * 
+ * @category Controller
+ * @package  Router
+ * 
+ */
 class Router{
     protected $RIGHTS = AUTH_GUEST;
     protected $METHODS = ['GET', 'POST'];
 
+    /**
+     * View
+     * 
+     * @param array $data
+     * 
+     * @return void
+     * 
+     */
     public function view($data = [])
     {
         require_once '../app/view/base.php';
     }
 
+    /**
+     * Token Generation
+     * 
+     * @return void
+     * 
+     */
     public function token_gen()
     {
         require_once '../app/utils/helpers.php';        
@@ -19,6 +43,12 @@ class Router{
         }
     }
 
+    /**
+     * Token Compare
+     * 
+     * @return bool
+     * 
+     */
     protected function token_compare(){
         require_once '../app/utils/helpers.php';
         if($_SESSION[SESSION_CSRF_TOKEN]==$_POST[FORM_CSRF_FIELD]){
@@ -26,6 +56,13 @@ class Router{
         }
         return false;
     }
+
+    /**
+     * Check Session Timeout
+     * 
+     * @return bool
+     * 
+     */
     public function check_session_timeout(){
         if(time()>=$_SESSION[SESSION_CSRF_EXPIRE]){
             return false;
@@ -34,6 +71,14 @@ class Router{
         }
     }
 
+    /**
+     * Abort
+     * 
+     * @param int $status
+     * 
+     * @return void
+     * 
+     */
     protected function abort($status)
     {
         http_response_code($status);
@@ -41,6 +86,15 @@ class Router{
         die();
     }
 
+    /**
+     * Call
+     * 
+     * @param string $method
+     * @param array $arguments
+     * 
+     * @return void
+     * 
+     */
     public function __call($method, $arguments)
     {
         if ($this->RIGHTS > $_SESSION[SESSION_RIGHTS]) {

@@ -1,13 +1,22 @@
 <?php
-/*
-getUserAccount will call the get_user function from User.php and 
-use it against the values. It will get the users from the database and return 
-an array. If the array is NULL, it will return the value of NULL.
-Otherwise, it will check if the password from POST is the same with the hashed 
-password in the database. It will then return the loginid, isadmin, and suspended values in an array.
-*/
+
+/**
+ * LoginController
+ * 
+ * This class is responsible for handling login requests
+ * 
+ * @category Controller
+ * @package  LoginController
+ * 
+ */
 class LoginController
 {
+    /**
+     * Get user account
+     * 
+     * @return array|null
+     * 
+     */
     public function getUserAccount()
     {
         require_once("../app/model/User.php");

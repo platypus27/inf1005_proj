@@ -1,5 +1,15 @@
 <?php declare(strict_types=1);
 require_once("../app/model/utils/Query.php");
+
+/**
+ * Model
+ * 
+ * This class is responsible for handling model operations
+ * 
+ * @category Model
+ * @package  Model
+ * 
+ */
 class Model {
     /**
      * Placeholder for known fields to be updated
@@ -33,6 +43,10 @@ class Model {
         return 0;
     }
 
+    /**
+     * Add new record
+     * @return  bool    True if successful and False if unsuccessful
+     */
     public function add(){
         $query = new Query();
         $fields = static::fields;
@@ -49,6 +63,10 @@ class Model {
         return $stmt->execute();
     }
 
+    /**
+     * Delete record
+     * @return  bool    True if successful and False if unsuccessful
+     */
     public function delete(){
         if ($this->id->getValue() != null){
             $query = new Query();
@@ -65,6 +83,10 @@ class Model {
         }
     }
 
+    /**
+     * Delete friend
+     * @return  bool    True if successful and False if unsuccessful
+     */
     public function deleteFriend(){
         if ($this->friendA->getValue() != null && $this->friendB->getValue() != null){
             $query = new Query();
@@ -85,6 +107,10 @@ class Model {
         }
     }
 
+    /**
+     * Delete friend request
+     * @return  bool    True if successful and False if unsuccessful
+     */
     public function deleteFriendRequest(){
         if ($this->userID->getValue() != null && $this->friendID->getValue() != null){
             $query = new Query();
@@ -105,6 +131,10 @@ class Model {
         }
     }
 
+    /**
+     * Update record
+     * @return  bool    True if successful and False if unsuccessful
+     */
     public function update() {
         if ($this->id->getValue() != null){
             $query = new Query();
@@ -130,6 +160,13 @@ class Model {
 }
 
 
+/**
+ * Get row
+ * @param   string  table       Table to get row from
+ * @param   string  fields      Fields to get
+ * @param   array   filter_by   Filter by
+ * @return  array   Model       Model
+ */
 function get_row($table, $fields='*', $filter_by=[]){
     $tablename = $table::tablename;
     $known_fields = $table::fields;
@@ -165,6 +202,13 @@ function get_row($table, $fields='*', $filter_by=[]){
     return count($model) > 0 ? $model : null;
 }
 
+/**
+ * Get table
+ * @param   string  table       Table to get row from
+ * @param   string  fields      Fields to get
+ * @param   array   filter_by   Filter by
+ * @return  array   Model       Model
+ */
 function get_table($table, $fields='*', $filter_by=[]){
     $tablename = $table::tablename;
     $known_fields = $table::fields;

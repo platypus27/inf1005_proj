@@ -1,8 +1,26 @@
 <?php
 require_once("../app/model/ContactUs.php");
 
+/**
+ * ContactUsController
+ * 
+ * This class handles the contact us form
+ * 
+ * @category Controller
+ * @package  ContactUsController
+ * 
+ */
 class ContactUsController{
 
+    /**
+     * Sanitize input
+     * 
+     * @param string $input input to be sanitized
+     * 
+     * @return string sanitized input
+     * 
+     * @var string $input input to be sanitized
+     */
     public function sanitize_input($input)
     {
         $input = trim($input);
@@ -11,6 +29,17 @@ class ContactUsController{
         return $input;
     }
 
+    /**
+     * Submit contact us form
+     * 
+     * @return bool
+     * @var string $errorMsg error message
+     * @var bool $success success status
+     * @var string $fname full name
+     * @var string $email email
+     * @var string $description description
+     * 
+     */
     public function submit_us(){
         $errorMsg = "";
         $success = true;

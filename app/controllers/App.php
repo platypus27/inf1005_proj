@@ -1,4 +1,15 @@
 <?php
+/**
+ * App class
+ * This class is the main controller of the application
+ * 
+ * @package    Blog
+ * @subpackage Blog/controllers
+ * @category   Controllers
+ * @version    1.0
+ * 
+ */
+
 require_once "../app/model/User.php";
 require_once "../app/controllers/Router.php";
 
@@ -11,6 +22,13 @@ class App{
 
     protected $url = '';
 
+    /**
+     * Constructor
+     * This function is the constructor of the App class
+     * 
+     * @return void
+     * 
+     */
     public function __construct(){
         require_once '../app/utils/helpers.php';
         $this->StartSession();
@@ -32,10 +50,16 @@ class App{
         $this->SetParam();
         $function = $this->function;
         $params = $this->params;
-        /*  go to /routes/<controller> and run function <function> with the following parameters <params> */           
         (new $this->controller())->$function($params);
-
     }
+
+    /**
+     * StartSession
+     * This function starts the session
+     * 
+     * @return void
+     * 
+     */
     public function StartSession(){
         session_start();
         if(!isset($_SESSION[SESSION_RIGHTS])){
@@ -51,12 +75,26 @@ class App{
         }
     }
 
+    /**
+     * parseUrl
+     * This function parses the URL for cleaner routing
+     * 
+     * @return void
+     * 
+     */
     public function parseUrl(){
         $this->url = parse_url($this->url);
         $this->url = explode('/',$this->url['path'], FILTER_SANITIZE_URL);
         unset($this->url[0]);
     }
 
+    /**
+     * SetPageName
+     * This function sets the page route
+     * 
+     * @return void
+     * 
+     */
     public function SetPageName(){
         if($this->url[1]==''){
             $this->controller = 'main';
@@ -71,6 +109,13 @@ class App{
         }
     }
 
+    /**
+     * SetFunctionName
+     * This function sets the function name
+     * 
+     * @return void
+     * 
+     */
     public function SetFunctionName(){
         if(isset($this->url[2])){
             if(method_exists($this->controller, $this->url[2])){
@@ -83,6 +128,13 @@ class App{
         }
     }
 
+    /**
+     * SetParam
+     * This function sets the parameters
+     * 
+     * @return void
+     * 
+     */
     public function SetParam(){
         $this->params = $this->url ? array_values($this->url) : [];
     }

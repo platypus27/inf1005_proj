@@ -1,17 +1,36 @@
 <?php
 require_once '../app/controllers/RegisterController.php';
 require_once '../app/utils/helpers.php';
-/*
-    register_process will call the RegisterController class's 
-    createUserAccount function which will do all the validation.
-    If the array $register is returned empty, it will redirect to the 
-    register page with an error, otherwise it will redirect to the login page.
 
-*/
+/**
+ * Register
+ * 
+ * This class is responsible for handling register requests
+ * 
+ * @category Router
+ * @package  Register
+ * 
+ */
 class register extends Router{
+    /**
+     * Index
+     * 
+     * This function is responsible for handling register requests
+     * 
+     * @return void
+     * 
+     */
     protected function index(){
         $this->view(['page' => 'register', 'script' => '/static/js/validate.js']);
     }
+    /**
+     * Process register
+     * 
+     * This function is responsible for processing register requests
+     * 
+     * @return void
+     * 
+     */
     protected function register_process(){
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->abort(403);

@@ -3,6 +3,15 @@ require_once("../app/model/utils/Field.php");
 require_once("../app/model/utils/Model.php");
 require_once("../app/utils/helpers.php");
 
+/**
+ * Comment
+ * 
+ * This class is responsible for handling comment operations
+ * 
+ * @category Model
+ * @package  Comment
+ * 
+ */
 class Comment extends Model{
     const tablename = "comments";
     const fields = ["comment", "usr_id", "posts_id", "created_at"];
@@ -12,6 +21,12 @@ class Comment extends Model{
     protected $posts_id = null;
     protected $created_at = null;
 
+    /**
+     * Constructor
+     * 
+     * @param   array   $values     Values to be assigned to fields
+     * 
+     */
     function __construct($values)
     {
         // Initialise fields
@@ -30,6 +45,14 @@ class Comment extends Model{
     }
 }
 
+/**
+ * Get comment
+ * 
+ * @param   string  $fields     Fields to be selected
+ * @param   array   $filter_by  Filter to be applied
+ * @return  array|null
+ * 
+ */
 function get_comment($fields='*', $filter_by=[]){
     return get_row('Comment', $fields, $filter_by);
 }

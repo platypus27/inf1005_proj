@@ -3,8 +3,26 @@
 require_once('../app/controllers/BlogsController.php');
 require_once('../app/controllers/BlogController.php');
 require_once('../app/controllers/LikesController.php');
+
+/**
+ * blogs
+ * 
+ * This class is responsible for handling blog requests
+ * 
+ * @category Router
+ * @package  blogs
+ * 
+ */
 class blogs extends Router 
 {
+    /**
+     * All
+     * 
+     * This function is responsible for handling all blog requests
+     * 
+     * @return void
+     * 
+     */
     public function all()
     {
         $blogs_control = new BlogsController();
@@ -60,6 +78,16 @@ class blogs extends Router
         }
         
     }
+    /**
+     * Add
+     * 
+     * This function is responsible for handling add blog requests
+     * 
+     * @param array $argv
+     * 
+     * @return void
+     * 
+     */
     protected function addComment($argv) {
         require_once('../app/controllers/BlogController.php');
         $blog_control = new BlogController();

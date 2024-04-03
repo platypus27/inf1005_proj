@@ -2,9 +2,12 @@
 require_once('../app/controllers/BlogController.php');
 require_once('../app/model/Post_Like.php');
 
-
-
-
+/**
+ * LikesController
+ * 
+ * @package LikesController
+ * 
+ */
 class LikesController{
     /**
      * Like a Post

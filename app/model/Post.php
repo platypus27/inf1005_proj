@@ -3,6 +3,15 @@ require_once("../app/model/utils/Field.php");
 require_once("../app/model/utils/Model.php");
 require_once("../app/utils/helpers.php");
 
+/**
+ * Post
+ * 
+ * This class is responsible for handling post operations
+ * 
+ * @category Model
+ * @package  Post
+ * 
+ */
 class Post extends Model{
     const tablename = "posts";
     const fields = ["id","title", "content", "created_at", "updated_at","usr_id"];
@@ -13,6 +22,12 @@ class Post extends Model{
     protected $updated_at = null;
     protected $usr_id = null;
 
+    /**
+     * Constructor
+     * 
+     * @param   array   $values     Values to be assigned to fields
+     * 
+     */
     function __construct($values)
     {
         // Initialise fields
@@ -33,6 +48,14 @@ class Post extends Model{
     }
 }
 
+/**
+ * Get post
+ * 
+ * @param   string  $fields     Fields to be selected
+ * @param   array   $filter_by  Filter to be applied
+ * @return  array|null
+ * 
+ */
 function get_post($fields='*', $filter_by=[]){
     return get_row('Post', $fields, $filter_by);
 }

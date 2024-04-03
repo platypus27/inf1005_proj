@@ -1,5 +1,12 @@
 <?php
+/**
+ * BlogsController
+ */
 class BlogsController{
+    /**
+     * Get all posts
+     * @return array
+     */
     public function getAllPosts(){
         require_once("../app/model/Post.php");
         $rows = get_post();
