@@ -53,9 +53,9 @@ h3.aboutus{
 }
 
 .footercont {
-  background-color: white;
+  color: #FFC2C3;
   border-radius: unset;
-  height: 5rem;
+  height: 3rem;
   display: flex;
   padding-left: 1rem;
   padding-top: 0.5rem;
