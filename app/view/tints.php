@@ -5,8 +5,9 @@
             <?php if (isset($data['tint_info']))  : ?>
                 <?php for ($x=0;$x<count($data['tint_info']);$x++) : ?>
                     <?php $entry = $data['tint_info'][$x]; ?>
-                    <div class="card m-5">
+                    <div class="card m5">
                         <div class="card-header postheader">
+                            <p class="card-text tint-post" style="font-size:xxx-large;"><?= $data['username'][$x] ?></p>
                             <p class="card-text tint-post" style="font-size:xx-large;"><?= $entry->getField('title')->getValue() ?></p>
                             <div class="card-body">
                                 <p class="card-text tint-post">
@@ -15,7 +16,7 @@
                                 </p>
                             </div>
                             <div class="row">
-                                <p class="col text-right pl-0"><?= $data['likes_count'][$x] ?> likes</p>
+                                <p class="col text-right pl-0"><?= $data['likes_count'][$entry->getField('id')->getValue()] ?> likes</p>
                             </div>
                             <h6 class="row">
                                     <?php
@@ -37,7 +38,7 @@
                                         <?php
                                         $like_css = "primary";
                                         $like_action = "Like";
-                                        if (is_null($data['usr_like'][$x])) {
+                                        if (is_null($data['usr_like'][$entry->getField('id')->getValue()])) {
                                             $like_css = "primary";
                                             $like_action = "Like";
                                         } else {
@@ -49,48 +50,42 @@
                                     </form>
                                 </div>
                                     <?php endif;?>
-                                <div class="p-1">
-                                    <?php //Get Full url
-                                    $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>
-                                    <button class="btn btn-primary share-btn"
-                                            data-clipboard-text="<?= $link ?>">Share</button>
-                                </div>
                                 <div class="p-1 ml-auto">
-                                        <button class="btn btn-primary" type="button" data-target="#comments<?= $x ?>" data-toggle="collapse" style="width:10rem;" aria-expanded="false"><?= sizeof($data['comments'][$x]) ?> comments</button>
-                                    </div>
+                                    <button class="btn btn-primary" type="button" data-target="#comments<?= $x ?>" data-toggle="collapse" style="width:10rem;" aria-expanded="false"><?= sizeof($data['comments'][$x]) ?> comments</button>
                                 </div>
-                                <div class="collapse commentslist" id="comments<?= $x ?>">
-                                    <?php if (!empty($data['comments'][$x])) : ?>
-                                        <?php $comment = $data['comments'][$x][0]; ?>
-                                        <?php
-                                        $epoch = (int)($comment['created_at']);
-                                        $commentTimeStamp = new DateTime("@$epoch");
-                                        ?>
-                                        <?php foreach ($data['comments'][$x] as $comment) : ?>
-                                            <div class="d-sm-flex flex-column commentbox">
-                                                <p class="p-1 commentloginid"><span><a class="nav-link"
-                                                    href="/tint/u/<?= $comment['loginid'] ?>"><?= $comment['loginid'] ?></a></span>
-                                                </p>
-                                                <p class="p-1 commentinfo"><?= $comment['comment'] ?></p>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                    <?php if(isset($_SESSION[SESSION_LOGIN])) :?>
-                                        <div class="card-body">                    
-                                            <form class="form-group" action="/tint/addComment/<?= $x ?> " method="post">
-                                                <label class="form-group" style="display:none;"><?= $_SESSION[SESSION_LOGIN] ?></label>
-                                                <span class="input-group">
-                                                    <input class="form-control comment-box" aria-label="With textarea" name="comment" required>
-                                                </span>
-                                                <span class="input-group float-right">
-                                                    <input type="hidden" name="<?=FORM_CSRF_FIELD?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
-                                                    <input class="btn btn-primary comment" type="submit" name="submit">
-                                                </span>
-                                            </form>
-                                            <span class="border-top"></span>
-                                    <?php endif;?>
-                                </div> 
                             </div>
+                            <div class="collapse commentslist" id="comments<?= $x ?>">
+                                <?php if (!empty($data['comments'][$x])) : ?>
+                                    <?php $comment = $data['comments'][$x][0]; ?>
+                                    <?php
+                                    $epoch = (int)($comment['created_at']);
+                                    $commentTimeStamp = new DateTime("@$epoch");
+                                    ?>
+                                    <?php foreach ($data['comments'][$x] as $comment) : ?>
+                                        <div class="d-sm-flex flex-column commentbox">
+                                            <p class="p-1 commentloginid"><span><a class="nav-link"
+                                                href="/tint/u/<?= $comment['loginid'] ?>"><?= $comment['loginid'] ?></a></span>
+                                            </p>
+                                            <p class="p-1 commentinfo"><?= $comment['comment'] ?></p>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                <?php if(isset($_SESSION[SESSION_LOGIN])) :?>
+                                    <div class="card-body">                    
+                                        <form class="form-group" action="/tints/addComment/<?= $entry->getField('id')->getValue() - 1 ?> " method="post">
+                                            <label class="form-group" style="display:none;"><?= $_SESSION[SESSION_LOGIN] ?></label>
+                                            <span class="input-group">
+                                                <input class="form-control comment-box" aria-label="With textarea" name="comment" required>
+                                            </span>
+                                            <span class="input-group float-right">
+                                                <input type="hidden" name="<?=FORM_CSRF_FIELD?>" value="<?= $_SESSION[SESSION_CSRF_TOKEN] ?>">
+                                                <input class="btn btn-primary comment" type="submit" name="submit">
+                                            </span>
+                                        </form>
+                                        <span class="border-top"></span>
+                                    </div>
+                                <?php endif;?>
+                            </div> 
                         </div>
                     </div>
                 <?php endfor; ?>

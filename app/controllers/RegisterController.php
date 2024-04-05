@@ -54,6 +54,10 @@ class RegisterController
         if (($userFound = get_user("*", ['loginid' => ['=', $values['loginid']]])) != null) {
             return null;
         }
+        
+        if (preg_match("/\s/", $values['loginid'])) {
+            return null; // Return null if the username contains a space
+        }
 
         $values['password'] = password_hash($values['password'], PASSWORD_DEFAULT);
         if ($_SERVER['REQUEST_URI'] === '/setup') {

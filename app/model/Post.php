@@ -46,6 +46,13 @@ class Post extends Model{
         $this->updated_at->setValue(get($values["updated_at"]));
         $this->usr_id->setValue(get($values["usr_id"]));
     }
+
+    public function getUsrId() {
+        return $this->usr_id;
+    }
+    public function getId() {
+        return $this->id;
+    }
 }
 
 /**

@@ -125,15 +125,19 @@ class tint extends Router
                     $usr_like = [];
                     $post_like = [];
                     $comments = [];
-                    for ($x=1;$x<=sizeof($tint_info);$x++) {
-                        require_once '../app/model/Post.php';
-                        if(isset($_SESSION[SESSION_LOGIN])){
-                            $usr_id = $tint_control->getUserID($_SESSION[SESSION_LOGIN]);
-                            $usr_like[] = $like_control->getLikes(3, $usr_id, $postid = $x);
-                            $post_like[] = $like_control->getLikes(2, null, $postid = $x);
+                    $usr_id = $tint_control->getUserID($_SESSION[SESSION_LOGIN]);
+                    $usr_like[] = $like_control->getLikes(1, $usr_id);
+                    $postsIds = [];
+                    foreach ($usr_like as $innerArray) {
+                        foreach ($innerArray as $postLikeObject) {
+                            $postsIds[] = $postLikeObject->getPostsId();
                         }
-                        // Get info of the tint post
+                    }
+                    $postIds = array_fill_keys($postsIds, 1);
+                    for ($x=1;$x<=sizeof($tint_info);$x++) {
                         $comments[] = $tint_control->getComments(($tint_info[$x-1])->getField('id')->getValue());
+                        $postid = $tint_info[$x-1]->getField('id')->getValue();
+                        $post_like[$postid] = $like_control->getLikes(2, null, $postid);
                     }
                     //Check if a comment is being added
                     
@@ -146,7 +150,7 @@ class tint extends Router
                         'tint_name' => $argv[0],
                         'tint_info' => $tint_info,
                         'requests' => $requested,
-                        'usr_like' => $usr_like,
+                        'usr_like' => $postIds,
                         'likes_count' => $post_like,
                         'comments' => $comments,
                         'script' => '../../public/static/js/clipboard.js',
@@ -274,6 +278,7 @@ class tint extends Router
         if (isset($_POST['postid'])) {
             if ($_POST['postid'] !== null ) {
                 $postid = $_POST['postid'];
+                error_log("Postid: " . $postid, 0);
                 //Checks if the postid is an int
                 if (is_int(filter_var($postid, FILTER_VALIDATE_INT))) {
                     $like_control->RemovePostLikes($tint_control->getUserID($_SESSION[SESSION_LOGIN]),$postid);

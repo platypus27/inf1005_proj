@@ -40,6 +40,10 @@ class Post_Like extends Model{
         $this->posts_id->setValue(get($values["posts_id"]));
         $this->liked_at->setValue(get($values["liked_at"]));
     }
+
+    public function getPostsId() {
+        return $this->posts_id->getValue();
+    }
 }
 
 /**

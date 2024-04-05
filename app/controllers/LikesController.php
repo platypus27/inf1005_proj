@@ -52,7 +52,7 @@ class LikesController{
         }
     }
     public function RemovePostLikes($postid){
-        $all_post_like = get_post_likes('*',['post_id'=>['=',$postid]]);
+        $all_post_like = get_post_likes('*',['posts_id'=>['=',$postid]]);
         foreach($all_post_like as $lp){
                 $lp->delete();
         }
@@ -83,17 +83,9 @@ class LikesController{
     }
     
     private function getUserPostLikes($usr_id) {
-        $all_usr_post = get_post('*',['usr_id'=>['=',$usr_id]]);
-        if (is_null($all_usr_post)) {
-            return 0;
-        }
-    
-        $like_counter = 0;
-        foreach($all_usr_post as $post){
-            $like = get_post_likes('*',['posts_id'=>['=',$post->getField('id')->getValue()]]);
-            $like_counter += is_null($like) ? 0 : sizeof($like);
-        }
-        return $like_counter;
+        $all_usr_likes = get_post_likes('*',['usr_id'=>['=',$usr_id]]);
+        
+        return $all_usr_likes;
     }
     
     private function getPostLikes($postid) {

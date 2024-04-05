@@ -3,6 +3,7 @@
 require_once('../app/controllers/TintsController.php');
 require_once('../app/controllers/TintController.php');
 require_once('../app/controllers/LikesController.php');
+require_once('../app/controllers/FriendsController.php');
 
 /**
  * tints
@@ -28,11 +29,21 @@ class tints extends Router
         $tints_control = new TintsController();
         $tint_control = new TintController();
         $like_control = new LikesController();
+        $friends_control = new FriendsController();
         
         //View Tint
 
         //Get All Tint info
         $tints_info = $tints_control->getAllPosts();
+        $usernames = array();
+        for ($i = 0; $i < count($tints_info); $i++) {
+            $usr_id_field = $tints_info[$i]->getUsrId();
+            $new_login_id = $friends_control->getLoginID($usr_id_field->getValue());
+        
+            $post_id_field = $tints_info[$i]->getId(); // Get the ID Field object
+            $post_id = $post_id_field->getValue(); // Get the value of the field
+            $usernames[$i] = $new_login_id;
+        }
         $loginid = $_SESSION[SESSION_LOGIN];
 
         //Check if tint has a post
@@ -52,23 +63,31 @@ class tints extends Router
             $usr_like = [];
             $post_like = [];
             $comments = [];
-            for ($x=1;$x<=sizeof($tints_info);$x++) {
-                require_once '../app/model/Post.php';
-                if(isset($_SESSION[SESSION_LOGIN])){
-                    $usr_id = $tint_control->getUserID($_SESSION[SESSION_LOGIN]);
-                    $usr_like[] = $like_control->getLikes(3, $usr_id, $postid = $x);
-                    $post_like[] = $like_control->getLikes(2, null, $postid = $x);
+            $usr_id = $tint_control->getUserID($_SESSION[SESSION_LOGIN]);
+            $usr_like[] = $like_control->getLikes(1, $usr_id);
+            $postsIds = [];
+            foreach ($usr_like as $innerArray) {
+                foreach ($innerArray as $postLikeObject) {
+                    $postsIds[] = $postLikeObject->getPostsId();
                 }
+            }
+            $postIds = array_fill_keys($postsIds, 1);
+            
+            for ($x=1;$x<=sizeof($tints_info);$x++) {
                 $comments[] = $tint_control->getComments(($tints_info[$x-1])->getField('id')->getValue());
+                $postid = $tints_info[$x-1]->getField('id')->getValue();
+                $post_like[$postid] = $like_control->getLikes(2, null, $postid);
             }
             $tints_info = array_reverse($tints_info);
             $comments = array_reverse($comments);
+            $usernames = array_reverse($usernames);
             //Set tint info
             $data = [
                 'page' => 'tints',
+                'username' => $usernames,
                 'tint_name' => $loginid,
                 'tint_info' => $tints_info,
-                'usr_like' => $usr_like,
+                'usr_like' => $postIds,
                 'likes_count' => $post_like,
                 'comments' => $comments,
                 'script' => '../../public/static/js/clipboard.js',

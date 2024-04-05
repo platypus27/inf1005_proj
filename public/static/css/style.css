@@ -50,6 +50,7 @@ h3.aboutus{
   width: 3rem;
   height: 3rem;
   border-radius: unset;
+  color: #917885;
 }
 
 .footercont {
@@ -317,6 +318,7 @@ form.profile button:hover{
 
 .card.m-1 {
   padding: 1rem;
+  flex-direction: column-reverse;
 }
 
 .card.border-0.m-3 {
@@ -374,6 +376,10 @@ form.contactus button:hover{
 
 form.contactus button:active{
   background-color: white !important;
+}
+
+.mobilecontent {
+  display: none;
 }
 
 /* posts */
@@ -469,6 +475,7 @@ form.register button{
   border-radius: 1rem;
   background-color: #917885;
   color: #f0ffce;
+  margin-top: 0.7rem;
 }
 
 form.register button:hover{
@@ -499,13 +506,13 @@ text-align:center;
 margin:auto;
 }
 
-/* Comment and Post Blog box style*/
+/* Comment and Post Tint box style*/
 .comment-box, .post-box{
   resize: none;
   height: 100%;
 }
 
-.post-preview, .blog-post{
+.post-preview, .tint-post{
     white-space: pre-line;
     overflow-wrap: break-word;
 }
@@ -522,7 +529,7 @@ margin:auto;
   z-index:10000;
 }
 
-/* blog */
+/* tint */
 .main-background{
   display: block;
   position: absolute;
@@ -539,7 +546,7 @@ margin:auto;
   background-color: rgba(255, 255,255, 0.7);
 }
 
-.intro-blog{
+.intro-tint{
   background-color: rgba(255, 255,255, 0.7);
   height: 100%;
 }
@@ -551,7 +558,11 @@ margin:auto;
   padding: 0.75rem 0;
 }
 
-.m-5 .card-header{
+.m5 {
+  padding: 3rem;
+}
+
+.m5 .card-header{
   background-color: white;
   border: 3px solid #917885;
   color: #917885;
@@ -787,12 +798,15 @@ button span#search:after {
   .nav-link {
     color: #917885 !important;
   }
+
+  
 }
 
 @media screen and (max-width: 1270px) {
   .mainpage {
     position: absolute;
     bottom: 0;
+    min-height: 50vh;
   }
 
   #cover {
@@ -827,5 +841,42 @@ button span#search:after {
 
   .tb {
     display: flex;
+  }
+
+  .fas {
+    font-size: 1.8rem;
+  }
+
+  .mobilecontent {
+    display: block;
+    padding: 15rem 2rem 10rem 2rem;
+  }
+
+  .registerhome {
+    color: #FFC2C3;
+    text-decoration: none;
+  }
+
+  .registerhome:hover {
+    color: #FFC2C3;
+    text-decoration: none;
+  }
+
+  .registerhome:active {
+    color: #FFC2C3;
+    text-decoration: none;
+  }
+
+  .mobilecontent h1 {
+    color: #917885;
+  }
+
+  .postheader {
+    padding: 1rem !important;
+  }
+
+  .m5 {
+    padding: 0 !important; 
+    margin-bottom: 1rem !important;
   }
 }
