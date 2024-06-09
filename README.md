@@ -1,5 +1,6 @@
 # INF1005 Final Project
-Social Media Web Application
+Social Media Web Application  
+First Sem Uni Web App Project  
   
 ## Features
 Users  
